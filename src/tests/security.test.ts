@@ -5,6 +5,7 @@ import {
   validateFileSignature,
   SafeUrlRegistry,
 } from '@/lib/security';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 describe('Security Utilities', () => {
   describe('sanitizeText', () => {
@@ -65,8 +66,8 @@ describe('Security Utilities', () => {
     });
   });
 
-  describe('SafeUrlRegistry', () => {
-    it('creates and tracks object URLs', () => {
+  describe('SafeUrlRegistry (Memory & Object URL Lifecycle)', () => {
+    it('creates, tracks, and revokes object URLs without memory leakage', () => {
       const registry = new SafeUrlRegistry();
       // Mock createObjectURL
       const revoked: string[] = [];
@@ -84,6 +85,33 @@ describe('Security Utilities', () => {
 
       URL.createObjectURL = origCreate;
       URL.revokeObjectURL = origRevoke;
+    });
+  });
+
+  describe('Rate Limiter (Denial of Service Protection)', () => {
+    it('permits requests within quota and blocks when limit is exceeded', () => {
+      const testIp = '192.168.1.100';
+      const options = { intervalMs: 10000, maxRequests: 3 };
+
+      // Request 1
+      const res1 = checkRateLimit(testIp, options);
+      expect(res1.allowed).toBe(true);
+      expect(res1.remaining).toBe(2);
+
+      // Request 2
+      const res2 = checkRateLimit(testIp, options);
+      expect(res2.allowed).toBe(true);
+      expect(res2.remaining).toBe(1);
+
+      // Request 3
+      const res3 = checkRateLimit(testIp, options);
+      expect(res3.allowed).toBe(true);
+      expect(res3.remaining).toBe(0);
+
+      // Request 4 (Blocked)
+      const res4 = checkRateLimit(testIp, options);
+      expect(res4.allowed).toBe(false);
+      expect(res4.remaining).toBe(0);
     });
   });
 });
