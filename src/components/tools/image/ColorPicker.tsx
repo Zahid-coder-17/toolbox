@@ -11,11 +11,14 @@ export function ColorPicker() {
   const [color, setColor] = useState('#2563eb');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  // Helper conversions
+  // Helper conversions with invalid hex safety guard
   const hexToRgb = (hex: string) => {
-    let clean = hex.replace('#', '');
+    let clean = hex.replace('#', '').trim();
     if (clean.length === 3) {
       clean = clean.split('').map((c) => c + c).join('');
+    }
+    if (!/^[0-9a-fA-F]{6}$/.test(clean)) {
+      return { r: 37, g: 99, b: 235 }; // fallback default
     }
     const num = parseInt(clean, 16);
     return {

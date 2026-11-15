@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import QRCode from 'qrcode';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
-import { copyToClipboard, downloadBlob, downloadText } from '@/lib/utils';
-import { Download, Copy, Check, QrCode as QrIcon, Sparkles } from 'lucide-react';
+import { copyToClipboard, downloadText } from '@/lib/utils';
+import { Download, Copy, Check, QrCode as QrIcon, Sparkles, AlertCircle } from 'lucide-react';
 
 export function QrCodeGenerator() {
   const [content, setContent] = useState('https://toolbox.dev');
@@ -15,60 +15,72 @@ export function QrCodeGenerator() {
   const [fgColor, setFgColor] = useState('#0f172a');
   const [bgColor, setBgColor] = useState('#ffffff');
   const [size, setSize] = useState(300);
+  const [margin, setMargin] = useState(2);
 
   const [dataUrl, setDataUrl] = useState('');
   const [svgString, setSvgString] = useState('');
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let active = true;
-    if (!content.trim()) {
+    let isCancelled = false;
+    const trimmed = content.trim();
+
+    if (!trimmed) {
       Promise.resolve().then(() => {
-        if (active) {
+        if (!isCancelled) {
+          setDataUrl('');
+          setSvgString('');
+          setError(null);
+        }
+      });
+      return;
+    }
+
+    if (trimmed.length > 2500) {
+      Promise.resolve().then(() => {
+        if (!isCancelled) {
+          setError('Content exceeds maximum QR payload capacity (2,500 characters). Please shorten your input.');
           setDataUrl('');
           setSvgString('');
         }
       });
-      return () => {
-        active = false;
-      };
+      return;
     }
 
-    // Generate PNG data URL
-    QRCode.toDataURL(content, {
-      errorCorrectionLevel: ecLevel,
-      color: {
-        dark: fgColor,
-        light: bgColor,
-      },
-      width: size,
-      margin: 2,
-    })
-      .then((url) => {
-        if (active) setDataUrl(url);
+    // Generate PNG and SVG
+    Promise.all([
+      QRCode.toDataURL(trimmed, {
+        errorCorrectionLevel: ecLevel,
+        color: { dark: fgColor, light: bgColor },
+        width: size,
+        margin,
+      }),
+      QRCode.toString(trimmed, {
+        type: 'svg',
+        errorCorrectionLevel: ecLevel,
+        color: { dark: fgColor, light: bgColor },
+        width: size,
+        margin,
+      }),
+    ])
+      .then(([pngUrl, svg]) => {
+        if (!isCancelled) {
+          setDataUrl(pngUrl);
+          setSvgString(svg);
+          setError(null);
+        }
       })
-      .catch((err) => console.error(err));
-
-    // Generate SVG string
-    QRCode.toString(content, {
-      type: 'svg',
-      errorCorrectionLevel: ecLevel,
-      color: {
-        dark: fgColor,
-        light: bgColor,
-      },
-      width: size,
-      margin: 2,
-    })
-      .then((svg) => {
-        if (active) setSvgString(svg);
-      })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        if (!isCancelled) {
+          setError(err instanceof Error ? err.message : 'Failed to generate QR Code');
+        }
+      });
 
     return () => {
-      active = false;
+      isCancelled = true;
     };
-  }, [content, ecLevel, fgColor, bgColor, size]);
+  }, [content, ecLevel, fgColor, bgColor, size, margin]);
 
   const handleDownloadPng = () => {
     if (!dataUrl) return;
@@ -94,7 +106,7 @@ export function QrCodeGenerator() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback: copy content
+      // Fallback: copy textual content
       copyToClipboard(content);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -118,6 +130,12 @@ export function QrCodeGenerator() {
               className="w-full p-3 text-slate-900 placeholder:text-slate-400 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
               aria-label="QR Code content text"
             />
+            {error && (
+              <div className="flex items-center gap-2 rounded-lg bg-red-50 p-3 text-xs text-red-700 border border-red-200">
+                <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
+                <span>{error}</span>
+              </div>
+            )}
 
             {/* Color Customization */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -131,11 +149,13 @@ export function QrCodeGenerator() {
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
                     className="h-10 w-12 cursor-pointer rounded border border-slate-200 bg-white p-0.5"
+                    aria-label="Foreground color picker"
                   />
                   <Input
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
                     className="font-mono text-xs uppercase"
+                    aria-label="Foreground hex code"
                   />
                 </div>
               </div>
@@ -150,86 +170,100 @@ export function QrCodeGenerator() {
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
                     className="h-10 w-12 cursor-pointer rounded border border-slate-200 bg-white p-0.5"
+                    aria-label="Background color picker"
                   />
                   <Input
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
                     className="font-mono text-xs uppercase"
+                    aria-label="Background hex code"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Error correction level */}
+            {/* Error Correction Selection */}
             <div className="pt-2">
               <label className="text-xs font-semibold text-slate-700 block mb-1.5">
-                Error Correction Margin
+                Error Correction Level
               </label>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
                   { id: 'L', label: 'Low (7%)' },
                   { id: 'M', label: 'Medium (15%)' },
                   { id: 'Q', label: 'Quartile (25%)' },
                   { id: 'H', label: 'High (30%)' },
-                ].map((lvl) => (
+                ].map((level) => (
                   <Button
-                    key={lvl.id}
-                    variant={ecLevel === lvl.id ? 'primary' : 'outline'}
+                    key={level.id}
+                    variant={ecLevel === level.id ? 'primary' : 'outline'}
                     size="sm"
-                    onClick={() => setEcLevel(lvl.id as 'L' | 'M' | 'Q' | 'H')}
-                    className="text-xs px-1"
+                    onClick={() => setEcLevel(level.id as 'L' | 'M' | 'Q' | 'H')}
+                    className="text-xs"
                   >
-                    {lvl.label}
+                    {level.label}
                   </Button>
                 ))}
               </div>
             </div>
 
-            {/* Size Slider */}
-            <Slider
-              label="Render Resolution"
-              valueDisplay={`${size} × ${size} px`}
-              min={150}
-              max={800}
-              step={50}
-              value={size}
-              onChange={(e) => setSize(Number(e.target.value))}
-            />
+            {/* Sliders: Size & Margin */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <Slider
+                label="Resolution Size"
+                valueDisplay={`${size}px`}
+                min={128}
+                max={600}
+                step={32}
+                value={size}
+                onChange={(e) => setSize(Number(e.target.value))}
+              />
+
+              <Slider
+                label="Quiet Zone (Margin)"
+                valueDisplay={`${margin} modules`}
+                min={0}
+                max={10}
+                value={margin}
+                onChange={(e) => setMargin(Number(e.target.value))}
+              />
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Live Preview Column */}
+      {/* Preview Column */}
       <div className="lg:col-span-5 space-y-6">
         <Card>
           <CardContent className="p-6 flex flex-col items-center justify-center space-y-6">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-500 self-start">
-              Live QR Preview
+              Live Preview
             </div>
 
             <div
-              className="p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center transition-all duration-200"
+              className="rounded-2xl p-6 shadow-sm border border-slate-200 flex items-center justify-center transition-all"
               style={{ backgroundColor: bgColor }}
             >
               {dataUrl ? (
                 <img
                   src={dataUrl}
                   alt="Generated QR Code"
-                  className="rounded"
-                  style={{ width: Math.min(260, size), height: Math.min(260, size) }}
+                  className="rounded object-contain"
+                  style={{ width: `${Math.min(size, 260)}px`, height: `${Math.min(size, 260)}px` }}
                 />
               ) : (
-                <div className="w-56 h-56 flex items-center justify-center text-slate-300">
-                  <QrIcon className="h-16 w-16" />
+                <div className="h-52 w-52 flex flex-col items-center justify-center text-slate-400 gap-2 border-2 border-dashed border-slate-200 rounded-xl">
+                  <QrIcon className="h-10 w-10 text-slate-300" />
+                  <span className="text-xs">Enter content to generate</span>
                 </div>
               )}
             </div>
 
+            {/* Download Buttons */}
             <div className="w-full space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <Button
                   variant="primary"
-                  size="md"
                   onClick={handleDownloadPng}
                   disabled={!dataUrl}
                   className="w-full"
@@ -239,7 +273,6 @@ export function QrCodeGenerator() {
                 </Button>
                 <Button
                   variant="outline"
-                  size="md"
                   onClick={handleDownloadSvg}
                   disabled={!svgString}
                   className="w-full"
@@ -250,14 +283,13 @@ export function QrCodeGenerator() {
               </div>
 
               <Button
-                variant="ghost"
-                size="sm"
+                variant="secondary"
                 onClick={handleCopyPng}
                 disabled={!dataUrl}
-                className="w-full text-slate-600"
+                className="w-full"
               >
-                {copied ? <Check className="h-4 w-4 text-emerald-600 mr-1.5" /> : <Copy className="h-4 w-4 mr-1.5" />}
-                {copied ? 'Copied to Clipboard' : 'Copy Image to Clipboard'}
+                {copied ? <Check className="h-4 w-4 mr-1.5 text-emerald-600" /> : <Copy className="h-4 w-4 mr-1.5" />}
+                {copied ? 'Copied to Clipboard' : 'Copy Image'}
               </Button>
             </div>
           </CardContent>
