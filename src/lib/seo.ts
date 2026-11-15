@@ -33,7 +33,7 @@ export function generateOrganizationSchema() {
     '@type': 'Organization',
     name: 'ToolBox',
     url: siteUrl,
-    logo: `${siteUrl}/icon.svg`,
+    logo: `${siteUrl}/logo.png`,
     description:
       'Provider of free, privacy-first online browser utilities for developers, designers, and professionals.',
     sameAs: [],

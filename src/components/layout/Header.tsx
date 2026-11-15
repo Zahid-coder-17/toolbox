@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Wrench, Search, Menu, X, ShieldCheck } from 'lucide-react';
+import { Search, Menu, X, ShieldCheck } from 'lucide-react';
 import { QuickSearchModal } from '@/components/search/QuickSearchModal';
 import { cn } from '@/lib/utils';
 
@@ -39,9 +40,15 @@ export function Header() {
               href="/"
               className="flex items-center gap-2.5 text-slate-900 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg p-1"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm group-hover:bg-blue-700 transition-colors">
-                <Wrench className="h-5 w-5" />
-              </div>
+              <Image
+                src="/logo.png"
+                alt=""
+                aria-hidden="true"
+                width={36}
+                height={36}
+                className="h-9 w-9 rounded-xl shadow-xs group-hover:scale-105 transition-transform object-contain"
+                priority
+              />
               <span className="text-xl font-bold tracking-tight">
                 Tool<span className="text-blue-600">Box</span>
               </span>

@@ -32,6 +32,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'ToolBox Team' }],
   creator: 'ToolBox',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

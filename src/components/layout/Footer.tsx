@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Wrench, Shield, Zap, Lock, Cookie } from 'lucide-react';
+import Image from 'next/image';
+import { Shield, Zap, Lock, Cookie } from 'lucide-react';
 import { CATEGORIES, TOOLS } from '@/config/tools';
 import { openConsentPreferences } from '@/components/consent/ConsentManager';
 
@@ -16,9 +17,14 @@ export function Footer() {
           {/* Brand & mission */}
           <div className="md:col-span-1 space-y-4">
             <Link href="/" className="flex items-center gap-2 text-slate-900">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-xs">
-                <Wrench className="h-4 w-4" />
-              </div>
+              <Image
+                src="/logo.png"
+                alt=""
+                aria-hidden="true"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-lg shadow-xs object-contain"
+              />
               <span className="text-lg font-bold tracking-tight">
                 Tool<span className="text-blue-600">Box</span>
               </span>
