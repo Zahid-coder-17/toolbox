@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   // Informational pages
-  ['/privacy', '/terms', '/about', '/contact'].forEach((path) => {
+  ['/privacy', '/terms', '/disclaimer', '/about', '/contact'].forEach((path) => {
     routes.push({
       url: `${baseUrl}${path}`,
       lastModified,

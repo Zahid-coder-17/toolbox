@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { CATEGORIES, ToolCategory, getToolsByCategory } from '@/config/tools';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { ToolCard, ICON_MAP } from '@/components/ui/tool-card';
-import { AdUnit } from '@/components/ads/AdSense';
+import { AdSlot } from '@/components/ads/AdSense';
 import {
   getCanonicalUrl,
   generateBreadcrumbSchema,
@@ -313,7 +313,11 @@ export default async function CategoryPage({
         </div>
 
         {/* Ad slot */}
-        <AdUnit slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HEADER} className="mb-8" />
+        <AdSlot
+          slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HEADER}
+          layout="banner"
+          className="mb-8"
+        />
 
         {/* Tools Grid */}
         <section aria-labelledby="category-tools-heading" className="mb-16">
@@ -333,7 +337,11 @@ export default async function CategoryPage({
         </section>
 
         {/* In-Content Ad */}
-        <AdUnit slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_INCONTENT} className="my-10" />
+        <AdSlot
+          slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_INCONTENT}
+          layout="in-article"
+          className="my-10"
+        />
 
         {/* Editorial Guide / Deep-Dive */}
         <section
@@ -436,7 +444,11 @@ export default async function CategoryPage({
         </section>
 
         {/* Footer Ad */}
-        <AdUnit slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_FOOTER} className="mt-8" />
+        <AdSlot
+          slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_FOOTER}
+          layout="footer"
+          className="mt-8"
+        />
       </div>
     </>
   );

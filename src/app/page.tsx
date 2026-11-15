@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { CATEGORIES, TOOLS } from '@/config/tools';
 import { ToolCard } from '@/components/ui/tool-card';
-import { AdUnit } from '@/components/ads/AdSense';
+import { AdSlot } from '@/components/ads/AdSense';
 import { generateWebsiteSchema, generateOrganizationSchema } from '@/lib/seo';
+import { trackToolSearch } from '@/lib/analytics';
 import { Search, Zap, Shield, Layers, Sparkles } from 'lucide-react';
 
 export default function HomePage() {
@@ -27,6 +28,15 @@ export default function HomePage() {
     }
     return list;
   }, [selectedCategory, searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery.trim().length >= 2) {
+      const handler = setTimeout(() => {
+        trackToolSearch(searchQuery.trim(), filteredTools.length);
+      }, 500);
+      return () => clearTimeout(handler);
+    }
+  }, [searchQuery, filteredTools.length]);
 
   const websiteSchema = generateWebsiteSchema();
   const organizationSchema = generateOrganizationSchema();
@@ -133,7 +143,10 @@ export default function HomePage() {
         </section>
 
         {/* Ad Unit */}
-        <AdUnit slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_INCONTENT} />
+        <AdSlot
+          slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_INCONTENT}
+          layout="in-article"
+        />
 
         {/* Trust & Features Section */}
         <section className="rounded-3xl border border-slate-200/80 bg-gradient-to-br from-slate-50 via-white to-blue-50/40 p-8 sm:p-12 shadow-xs">

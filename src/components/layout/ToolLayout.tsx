@@ -7,8 +7,9 @@ import {
 } from '@/config/tools';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { Badge } from '@/components/ui/badge';
-import { ToolCard, ICON_MAP } from '@/components/ui/tool-card';
-import { AdUnit } from '@/components/ads/AdSense';
+import { ICON_MAP } from '@/components/ui/tool-card';
+import { AdSlot } from '@/components/ads/AdSense';
+import { ToolAnalyticsTracker, RelatedToolLink } from '@/components/analytics/ToolAnalyticsTracker';
 import {
   generateWebApplicationSchema,
   generateHowToSchema,
@@ -48,6 +49,11 @@ export function ToolLayout({
 
   return (
     <>
+      <ToolAnalyticsTracker
+        toolId={tool.id}
+        toolName={tool.name}
+        category={tool.category}
+      />
       {/* Structured data schemas */}
       <script
         type="application/ld+json"
@@ -117,8 +123,9 @@ export function ToolLayout({
         </div>
 
         {/* Header Ad Slot (Configurable) */}
-        <AdUnit
+        <AdSlot
           slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HEADER}
+          layout="banner"
           className="mb-8"
         />
 
@@ -128,8 +135,9 @@ export function ToolLayout({
         </section>
 
         {/* In-Content / Middle Ad Slot */}
-        <AdUnit
+        <AdSlot
           slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_INCONTENT}
+          layout="in-article"
           className="my-10"
         />
 
@@ -217,7 +225,11 @@ export function ToolLayout({
               </h3>
               <div className="space-y-3">
                 {relatedTools.map((relTool) => (
-                  <ToolCard key={relTool.id} tool={relTool} />
+                  <RelatedToolLink
+                    key={relTool.id}
+                    currentToolId={tool.id}
+                    relatedTool={relTool}
+                  />
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-slate-100">
@@ -244,8 +256,9 @@ export function ToolLayout({
         </div>
 
         {/* Footer Ad Slot (Configurable) */}
-        <AdUnit
+        <AdSlot
           slotId={process.env.NEXT_PUBLIC_ADSENSE_SLOT_FOOTER}
+          layout="footer"
           className="mt-12"
         />
       </div>

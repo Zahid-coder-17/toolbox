@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { Wrench, Shield, Zap, Lock, Heart } from 'lucide-react';
+import { Wrench, Shield, Zap, Lock, Cookie } from 'lucide-react';
 import { CATEGORIES, TOOLS } from '@/config/tools';
+import { openConsentPreferences } from '@/components/consent/ConsentManager';
 
 export function Footer() {
   const popularTools = TOOLS.filter((t) => t.badge === 'Popular' || t.badge === 'Essential').slice(0, 6);
@@ -84,14 +87,29 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/disclaimer" className="hover:text-blue-600 transition-colors">
+                  Disclaimer
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-blue-600 transition-colors">
                   About ToolBox
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-blue-600 transition-colors">
-                  Contact & Feedback
+                  Contact &amp; Feedback
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => openConsentPreferences()}
+                  className="hover:text-blue-600 transition-colors flex items-center gap-1.5 cursor-pointer text-left"
+                >
+                  <Cookie className="h-3.5 w-3.5" />
+                  <span>Cookie Preferences</span>
+                </button>
               </li>
             </ul>
           </div>

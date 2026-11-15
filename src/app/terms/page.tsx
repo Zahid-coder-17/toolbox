@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { getCanonicalUrl } from '@/lib/seo';
 
@@ -48,7 +49,18 @@ export default function TermsPage() {
           </p>
           <h2 className="text-base font-bold text-slate-900 pt-2">Disclaimer of Warranties</h2>
           <p>
-            While every effort has been made to ensure numerical, mathematical, and algorithmic precision across our financial calculators and file processors, calculations and conversions are provided without warranty of any kind. ToolBox is not liable for financial decisions made using these utilities.
+            While every effort has been made to ensure numerical, mathematical, and algorithmic precision across our financial calculators and file processors, calculations and conversions are provided without warranty of any kind. Please refer to our full{' '}
+            <Link href="/disclaimer" className="text-blue-600 underline">
+              Disclaimer
+            </Link>{' '}
+            for detailed financial and technical accuracy notices.
+          </p>
+          <h2 className="text-base font-bold text-slate-900 pt-2">Privacy &amp; Data Rights</h2>
+          <p>
+            We process your files locally in your web browser. For full details on our client-side architecture, cookies, and Google Consent Mode v2, please review our{' '}
+            <Link href="/privacy" className="text-blue-600 underline">
+              Privacy Policy
+            </Link>.
           </p>
         </div>
       </div>

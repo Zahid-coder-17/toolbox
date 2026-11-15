@@ -1,69 +1,125 @@
 'use client';
 
-import React, { useEffect } from 'react';
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+import React, { useEffect, useState } from 'react';
+import Script from 'next/script';
+import { getStoredConsent, ConsentSettings } from '@/components/consent/ConsentManager';
 
 export function AdSenseScript() {
-  if (!CLIENT_ID) return null;
+  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  if (!clientId) return null;
 
   return (
-    <script
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${CLIENT_ID}`}
+    <Script
+      id="adsense-init"
+      strategy="afterInteractive"
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`}
       crossOrigin="anonymous"
     />
   );
 }
 
-interface AdUnitProps {
+export interface AdSlotProps {
+  clientId?: string;
   slotId?: string;
   format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal';
+  layout?: 'banner' | 'in-article' | 'rectangle' | 'footer';
   responsive?: boolean;
   className?: string;
 }
 
-export function AdUnit({
+/**
+ * Production-ready, CLS-safe AdSlot component.
+ *
+ * Requirements:
+ * - Uses environment configuration for publisher ID and slot IDs.
+ * - Reserved layout dimensions to eliminate Cumulative Layout Shift (CLS).
+ * - Clear semantic (<aside>) and visual separation from tool controls.
+ * - Respects Google Consent Mode v2 (serves non-personalized ads when personalization is denied).
+ * - Never displays deceptive, fake, or unapproved ad placeholders when IDs are missing.
+ */
+export function AdSlot({
+  clientId,
   slotId,
   format = 'auto',
+  layout = 'banner',
   responsive = true,
   className = '',
-}: AdUnitProps) {
+}: AdSlotProps) {
+  const activeClientId = clientId || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const [isNpa, setIsNpa] = useState<boolean>(() => {
+    const consent = getStoredConsent();
+    return consent ? consent.ad_personalization !== 'granted' : true;
+  });
+
   useEffect(() => {
-    if (!CLIENT_ID || !slotId) return;
+    // Listen to live consent updates
+    const handleConsentUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<ConsentSettings>;
+      if (customEvent.detail) {
+        setIsNpa(customEvent.detail.ad_personalization !== 'granted');
+      }
+    };
+
+    window.addEventListener('toolbox:consent-updated', handleConsentUpdate);
+    return () => {
+      window.removeEventListener('toolbox:consent-updated', handleConsentUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!activeClientId || !slotId) return;
+
     try {
       if (typeof window !== 'undefined') {
-        // @ts-expect-error - adsbygoogle global queue
+        // @ts-expect-error - Google AdSense push queue
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch {
-      // Ignore adsbygoogle push error if script is blocked by ad blocker
+      // Gracefully catch push errors (e.g. ad blockers or strict browser privacy)
     }
-  }, [slotId]);
+  }, [activeClientId, slotId]);
 
-  // If no AdSense publisher ID is configured, do not render intrusive placeholder ads
-  if (!CLIENT_ID || !slotId) {
+  // If no AdSense publisher ID or slot ID is configured, do not render empty or fake placeholder ads
+  if (!activeClientId || !slotId) {
     return null;
   }
+
+  // Pre-calculated minimum layout dimensions to prevent Cumulative Layout Shift (CLS)
+  const getContainerDimensionClass = () => {
+    switch (layout) {
+      case 'banner':
+      case 'footer':
+        return 'min-h-[90px] sm:min-h-[100px] max-w-[728px]';
+      case 'rectangle':
+        return 'min-h-[250px] max-w-[300px]';
+      case 'in-article':
+      default:
+        return 'min-h-[120px] sm:min-h-[280px] max-w-full';
+    }
+  };
 
   return (
     <aside
       aria-label="Advertisement"
-      className={`my-8 flex flex-col items-center justify-center overflow-hidden rounded-lg border border-slate-200/60 bg-slate-50/50 p-2 text-center ${className}`}
+      className={`my-8 flex flex-col items-center justify-center overflow-hidden rounded-xl border border-slate-200/70 bg-slate-50/40 p-2 sm:p-3 text-center mx-auto ${className}`}
     >
-      <span className="mb-1 text-[10px] font-medium tracking-wider text-slate-400 uppercase select-none">
+      <span className="mb-1.5 text-[10px] font-bold tracking-widest text-slate-400 uppercase select-none">
         Advertisement
       </span>
-      <div className="w-full min-h-[90px] flex items-center justify-center">
+      <div className={`w-full flex items-center justify-center ${getContainerDimensionClass()}`}>
         <ins
           className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client={CLIENT_ID}
+          style={{ display: 'block', width: '100%' }}
+          data-ad-client={activeClientId}
           data-ad-slot={slotId}
           data-ad-format={format}
           data-full-width-responsive={responsive ? 'true' : 'false'}
+          data-npa={isNpa ? '1' : undefined}
         />
       </div>
     </aside>
   );
 }
+
+// Backwards-compatible export
+export const AdUnit = AdSlot;

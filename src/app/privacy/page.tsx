@@ -2,7 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { getCanonicalUrl } from '@/lib/seo';
-import { ShieldCheck, CheckCircle } from 'lucide-react';
+import { ShieldCheck, CheckCircle, Cookie } from 'lucide-react';
+import { ManageConsentButton } from '@/components/consent/ManageConsentButton';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — 100% Client-Side Data Protection',
@@ -83,14 +84,33 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-900">3. Advertising &amp; Third-Party Services</h2>
+            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <Cookie className="h-5 w-5 text-blue-600" />
+              3. Cookies, Monetization &amp; Google Consent Mode v2
+            </h2>
             <p>
-              ToolBox may display non-intrusive advertisements served through Google AdSense to sustain free public access. Google AdSense uses cookies to serve relevant ads based on prior visits to this and other websites. You can manage or disable personalized advertising by visiting Google&apos;s Ads Settings.
+              To keep our 24 utilities completely free, ToolBox displays non-intrusive advertisements served through <strong>Google AdSense</strong>. Google and third-party vendors use cookies to serve ads based on prior visits to our site or other websites.
+            </p>
+            <p>
+              We implement <strong>Google Consent Mode v2</strong>. By default, advertising and personalization storage is set to <code>&apos;denied&apos;</code> until you provide consent. When personalized advertising is declined, Google AdSense serves only non-personalized, contextual advertisements without profiling cookies.
+            </p>
+            <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-4 space-y-3">
+              <div className="text-xs font-semibold text-blue-900">
+                Control your cookie preferences at any time:
+              </div>
+              <ManageConsentButton />
+            </div>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-lg font-bold text-slate-900">4. Analytics Disclosure</h2>
+            <p>
+              We use Google Analytics 4 (GA4) with IP anonymization enabled to collect aggregated, non-personally identifiable metrics (such as tool visit counts and broad browser types). We strictly enforce automated filters ensuring that file contents, user inputs, or confidential text are never transmitted to analytics.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-900">4. Contact &amp; Questions</h2>
+            <h2 className="text-lg font-bold text-slate-900">5. Contact &amp; Questions</h2>
             <p>
               If you have any questions or security inquiries regarding our privacy standards, please reach out through our Contact page.
             </p>

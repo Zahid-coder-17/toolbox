@@ -218,10 +218,10 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
   });
 
   describe('Sitemap & Robots.txt', () => {
-    it('generates complete XML sitemap covering all 33 production endpoints', () => {
+    it('generates complete XML sitemap covering all 34 production endpoints', () => {
       const entries = sitemap();
-      // 1 root + 4 categories + 24 tools + 4 legal/info = 33
-      expect(entries.length).toBe(33);
+      // 1 root + 4 categories + 24 tools + 5 legal/info = 34
+      expect(entries.length).toBe(34);
 
       const urls = entries.map((e) => e.url);
       const siteUrl = getSiteUrl();
@@ -242,6 +242,7 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
       // Check info pages
       expect(urls).toContain(`${siteUrl}/privacy`);
       expect(urls).toContain(`${siteUrl}/terms`);
+      expect(urls).toContain(`${siteUrl}/disclaimer`);
       expect(urls).toContain(`${siteUrl}/about`);
       expect(urls).toContain(`${siteUrl}/contact`);
 

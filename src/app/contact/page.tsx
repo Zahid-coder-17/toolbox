@@ -5,7 +5,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Mail, CheckCircle2, MessageSquare } from 'lucide-react';
+import { CheckCircle2, MessageSquare } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
