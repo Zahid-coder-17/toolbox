@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:localhost": "node scripts/test-localhost.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {
