@@ -39,11 +39,24 @@ export async function generateMetadata({
       description: tool.metaDescription,
       url: getCanonicalUrl(tool.href),
       type: 'website',
+      siteName: 'ToolBox',
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: `${tool.name} — Free Online Tool`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: tool.metaTitle,
       description: tool.metaDescription,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

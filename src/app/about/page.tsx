@@ -1,12 +1,34 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
-import { Wrench, Zap, Shield, Heart } from 'lucide-react';
+import { getCanonicalUrl } from '@/lib/seo';
+import { Wrench, Zap, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About ToolBox — Fast, Private Web Utilities',
   description:
     'ToolBox is an open suite of 24 client-side web utilities built with Next.js, Web Workers, and browser Canvas APIs.',
+  alternates: {
+    canonical: getCanonicalUrl('/about'),
+  },
+  openGraph: {
+    title: 'About ToolBox — Fast, Private Web Utilities',
+    description:
+      'ToolBox is an open suite of 24 client-side web utilities built with Next.js, Web Workers, and browser Canvas APIs.',
+    url: getCanonicalUrl('/about'),
+    type: 'website',
+    siteName: 'ToolBox',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About ToolBox — Fast, Private Web Utilities',
+    description:
+      'ToolBox is an open suite of 24 client-side web utilities built with Next.js, Web Workers, and browser Canvas APIs.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function AboutPage() {

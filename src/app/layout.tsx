@@ -3,9 +3,13 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AdSenseScript } from '@/components/ads/AdSense';
+import { getSiteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://toolbox.dev'),
+  metadataBase: new URL(getSiteUrl()),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'ToolBox — 24 Free Online Utilities & Productivity Tools',
     template: '%s | ToolBox',

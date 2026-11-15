@@ -1,12 +1,34 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
-import { ShieldCheck, Lock, CheckCircle } from 'lucide-react';
+import { getCanonicalUrl } from '@/lib/seo';
+import { ShieldCheck, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — 100% Client-Side Data Protection',
   description:
     'Learn how ToolBox protects your privacy. All text, images, and PDF operations run locally in your web browser without server storage.',
+  alternates: {
+    canonical: getCanonicalUrl('/privacy'),
+  },
+  openGraph: {
+    title: 'Privacy Policy — 100% Client-Side Data Protection',
+    description:
+      'Learn how ToolBox protects your privacy. All text, images, and PDF operations run locally in your web browser without server storage.',
+    url: getCanonicalUrl('/privacy'),
+    type: 'website',
+    siteName: 'ToolBox',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy — 100% Client-Side Data Protection',
+    description:
+      'Learn how ToolBox protects your privacy. All text, images, and PDF operations run locally in your web browser without server storage.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPage() {

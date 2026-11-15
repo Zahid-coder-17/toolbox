@@ -1,25 +1,63 @@
-import { ToolDefinition, FAQItem } from '@/config/tools';
+import { ToolDefinition, FAQItem, ToolCategory, CategoryDefinition } from '@/config/tools';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolbox.dev';
+export function getSiteUrl(): string {
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolbox.dev';
+  return url.replace(/\/+$/, '');
+}
 
 export function getCanonicalUrl(path: string): string {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `${SITE_URL}${cleanPath}`;
+  return `${getSiteUrl()}${cleanPath}`;
 }
 
 export function generateWebsiteSchema() {
+  const siteUrl = getSiteUrl();
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'ToolBox',
-    url: SITE_URL,
+    url: siteUrl,
     description: 'Free, fast, and secure online utilities for text, images, PDFs, and financial calculations.',
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${SITE_URL}/?q={search_term_string}`,
+      target: `${siteUrl}/?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   };
+}
+
+export function generateOrganizationSchema() {
+  const siteUrl = getSiteUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'ToolBox',
+    url: siteUrl,
+    logo: `${siteUrl}/icon.svg`,
+    description:
+      'Provider of free, privacy-first online browser utilities for developers, designers, and professionals.',
+    sameAs: [],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Support',
+      url: `${siteUrl}/contact`,
+    },
+  };
+}
+
+function mapApplicationCategory(category: ToolCategory): string {
+  switch (category) {
+    case 'text':
+      return 'UtilitiesApplication';
+    case 'image':
+      return 'DesignApplication';
+    case 'pdf':
+      return 'BusinessApplication';
+    case 'calculators':
+      return 'FinanceApplication';
+    default:
+      return 'UtilityApplication';
+  }
 }
 
 export function generateWebApplicationSchema(tool: ToolDefinition) {
@@ -29,8 +67,8 @@ export function generateWebApplicationSchema(tool: ToolDefinition) {
     name: tool.name,
     url: getCanonicalUrl(tool.href),
     description: tool.longDescription,
-    applicationCategory: 'UtilityApplication',
-    operatingSystem: 'Any',
+    applicationCategory: mapApplicationCategory(tool.category),
+    operatingSystem: 'All',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -77,6 +115,7 @@ export function generateFAQSchema(faqs: FAQItem[]) {
 export function generateBreadcrumbSchema(
   items: { name: string; url: string }[]
 ) {
+  const siteUrl = getSiteUrl();
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -84,7 +123,30 @@ export function generateBreadcrumbSchema(
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}`,
+      item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url.startsWith('/') ? item.url : `/${item.url}`}`,
     })),
+  };
+}
+
+export function generateCollectionPageSchema(
+  category: CategoryDefinition,
+  tools: ToolDefinition[]
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${category.name} — Free Online Utilities`,
+    url: getCanonicalUrl(category.href),
+    description: category.description,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: tools.map((tool, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: tool.name,
+        url: getCanonicalUrl(tool.href),
+        description: tool.shortDescription,
+      })),
+    },
   };
 }

@@ -1,10 +1,30 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
+import { getCanonicalUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Terms of Service — ToolBox',
   description: 'Terms of Service and acceptable use policies for ToolBox free online utilities.',
+  alternates: {
+    canonical: getCanonicalUrl('/terms'),
+  },
+  openGraph: {
+    title: 'Terms of Service — ToolBox',
+    description: 'Terms of Service and acceptable use policies for ToolBox free online utilities.',
+    url: getCanonicalUrl('/terms'),
+    type: 'website',
+    siteName: 'ToolBox',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Terms of Service — ToolBox',
+    description: 'Terms of Service and acceptable use policies for ToolBox free online utilities.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsPage() {

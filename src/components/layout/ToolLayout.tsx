@@ -13,6 +13,7 @@ import {
   generateWebApplicationSchema,
   generateHowToSchema,
   generateFAQSchema,
+  generateBreadcrumbSchema,
 } from '@/lib/seo';
 import {
   HelpCircle,
@@ -39,10 +40,19 @@ export function ToolLayout({
   const webAppSchema = generateWebApplicationSchema(tool);
   const howToSchema = generateHowToSchema(tool);
   const faqSchema = generateFAQSchema(tool.faqs);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: category.name, url: category.href },
+    { name: tool.name, url: tool.href },
+  ]);
 
   return (
     <>
       {/* Structured data schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}

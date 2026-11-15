@@ -1,27 +1,11 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import Link from 'next/link';
-import {
-  CATEGORIES,
-  TOOLS,
-  ToolCategory,
-  searchTools,
-} from '@/config/tools';
-import { ToolCard, ICON_MAP } from '@/components/ui/tool-card';
+import { CATEGORIES, TOOLS } from '@/config/tools';
+import { ToolCard } from '@/components/ui/tool-card';
 import { AdUnit } from '@/components/ads/AdSense';
-import { generateWebsiteSchema } from '@/lib/seo';
-import {
-  Search,
-  Zap,
-  Shield,
-  Layers,
-  Sparkles,
-  ArrowRight,
-  FileCheck,
-  CheckCircle2,
-  FileText,
-} from 'lucide-react';
+import { generateWebsiteSchema, generateOrganizationSchema } from '@/lib/seo';
+import { Search, Zap, Shield, Layers, Sparkles } from 'lucide-react';
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -45,12 +29,17 @@ export default function HomePage() {
   }, [selectedCategory, searchQuery]);
 
   const websiteSchema = generateWebsiteSchema();
+  const organizationSchema = generateOrganizationSchema();
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">

@@ -1,21 +1,22 @@
 import { MetadataRoute } from 'next';
 import { TOOLS, CATEGORIES } from '@/config/tools';
+import { getSiteUrl } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolbox.dev';
+  const baseUrl = getSiteUrl();
   const lastModified = new Date();
 
   // Root
   const routes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: `${baseUrl}/`,
       lastModified,
       changeFrequency: 'daily',
       priority: 1.0,
     },
   ];
 
-  // Category pages
+  // Category pages (4)
   Object.values(CATEGORIES).forEach((cat) => {
     routes.push({
       url: `${baseUrl}${cat.href}`,
