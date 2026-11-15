@@ -85,6 +85,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6319866397206659"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-white text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
         <GoogleAnalyticsScript />
         <AdSenseScript />

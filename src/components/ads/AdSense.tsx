@@ -5,8 +5,7 @@ import Script from 'next/script';
 import { getStoredConsent, ConsentSettings } from '@/components/consent/ConsentManager';
 
 export function AdSenseScript() {
-  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-  if (!clientId) return null;
+  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-6319866397206659';
 
   return (
     <Script
@@ -45,7 +44,7 @@ export function AdSlot({
   responsive = true,
   className = '',
 }: AdSlotProps) {
-  const activeClientId = clientId || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const activeClientId = clientId || process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-6319866397206659';
   const [isNpa, setIsNpa] = useState<boolean>(() => {
     const consent = getStoredConsent();
     return consent ? consent.ad_personalization !== 'granted' : true;
