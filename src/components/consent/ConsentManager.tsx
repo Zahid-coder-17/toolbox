@@ -54,17 +54,18 @@ export function openConsentPreferences() {
 }
 
 export function ConsentManager() {
-  const [isOpen, setIsOpen] = useState<boolean>(() => {
-    return getStoredConsent() === null;
-  });
+  const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [allowAnalytics, setAllowAnalytics] = useState(true);
   const [allowAds, setAllowAds] = useState(true);
 
   useEffect(() => {
-    // Re-apply stored consent to gtag if present
+    setMounted(true);
     const existing = getStoredConsent();
-    if (existing && typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    if (existing === null) {
+      setIsOpen(true);
+    } else if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('consent', 'update', {
         ad_storage: existing.ad_storage,
         ad_user_data: existing.ad_user_data,
@@ -89,7 +90,9 @@ export function ConsentManager() {
     };
   }, []);
 
-  const handleAcceptAll = () => {
+  const handleAcceptAll = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     saveConsent({
       ad_storage: 'granted',
       ad_user_data: 'granted',
@@ -100,7 +103,9 @@ export function ConsentManager() {
     setShowCustomize(false);
   };
 
-  const handleRejectAll = () => {
+  const handleRejectAll = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     saveConsent({
       ad_storage: 'denied',
       ad_user_data: 'denied',
@@ -111,7 +116,9 @@ export function ConsentManager() {
     setShowCustomize(false);
   };
 
-  const handleSaveCustom = () => {
+  const handleSaveCustom = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     saveConsent({
       ad_storage: allowAds ? 'granted' : 'denied',
       ad_user_data: allowAds ? 'granted' : 'denied',
@@ -122,15 +129,18 @@ export function ConsentManager() {
     setShowCustomize(false);
   };
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
   return (
     <div
       role="region"
       aria-label="Cookie & Privacy Consent"
-      className="fixed bottom-0 inset-x-0 z-50 p-4 sm:p-6 bg-slate-900/40 backdrop-blur-xs flex justify-center pointer-events-auto"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-xs pointer-events-auto"
     >
-      <div className="w-full max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-2xl space-y-4">
+      <div
+        className="w-full max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-2xl space-y-4 relative z-10 pointer-events-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-700">
             <Cookie className="h-5 w-5" />
@@ -204,15 +214,15 @@ export function ConsentManager() {
 
           <div className="flex items-center gap-2">
             {showCustomize ? (
-              <Button size="sm" onClick={handleSaveCustom}>
+              <Button type="button" size="sm" onClick={handleSaveCustom} className="cursor-pointer">
                 Save Preferences
               </Button>
             ) : (
               <>
-                <Button variant="outline" size="sm" onClick={handleRejectAll}>
+                <Button type="button" variant="outline" size="sm" onClick={handleRejectAll} className="cursor-pointer">
                   Reject Non-Essential
                 </Button>
-                <Button size="sm" onClick={handleAcceptAll}>
+                <Button type="button" size="sm" onClick={handleAcceptAll} className="cursor-pointer">
                   Accept All
                 </Button>
               </>

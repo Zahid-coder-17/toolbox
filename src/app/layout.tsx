@@ -85,11 +85,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      <body className="min-h-screen flex flex-col bg-white text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
         <GoogleAnalyticsScript />
         <AdSenseScript />
-      </head>
-      <body className="min-h-screen flex flex-col bg-white text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
