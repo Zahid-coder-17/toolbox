@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, X, ArrowRight, CornerDownLeft } from 'lucide-react';
-import { TOOLS, ToolDefinition, searchTools } from '@/config/tools';
+import { Search, X, CornerDownLeft, FileText } from 'lucide-react';
+import { searchTools } from '@/config/tools';
 import { ICON_MAP } from '@/components/ui/tool-card';
-import { FileText } from 'lucide-react';
 
 export function QuickSearchModal({
   isOpen,
@@ -15,20 +14,15 @@ export function QuickSearchModal({
   onClose: () => void;
 }) {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<ToolDefinition[]>(TOOLS);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const results = useMemo(() => searchTools(query), [query]);
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
-      setQuery('');
-      setResults(TOOLS);
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    setResults(searchTools(query));
-  }, [query]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -90,7 +84,10 @@ export function QuickSearchModal({
                 <Link
                   key={tool.id}
                   href={tool.href}
-                  onClick={onClose}
+                  onClick={() => {
+                    setQuery('');
+                    onClose();
+                  }}
                   className="flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 transition-colors group"
                 >
                   <div className="flex items-center gap-3">

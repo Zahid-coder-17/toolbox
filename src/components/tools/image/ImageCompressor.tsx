@@ -43,11 +43,11 @@ export function ImageCompressor() {
 
   const compressImage = () => {
     if (!sourceUrl) return;
-    setIsProcessing(true);
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
+      setIsProcessing(true);
       const canvas = document.createElement('canvas');
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;

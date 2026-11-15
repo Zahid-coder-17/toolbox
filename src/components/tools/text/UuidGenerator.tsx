@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { copyToClipboard, downloadText } from '@/lib/utils';
-import { Copy, RefreshCw, Download, Check, ShieldCheck, Hash } from 'lucide-react';
+import { Copy, RefreshCw, Download, Check, ShieldCheck } from 'lucide-react';
 
 export function UuidGenerator() {
   const [quantity, setQuantity] = useState(5);
   const [uppercase, setUppercase] = useState(false);
   const [removeHyphens, setRemoveHyphens] = useState(false);
   const [addBraces, setAddBraces] = useState(false);
-  const [uuids, setUuids] = useState<string[]>([]);
+  const [refreshKey, setRefreshKey] = useState(0);
   const [copiedAll, setCopiedAll] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
@@ -37,18 +37,19 @@ export function UuidGenerator() {
     return res;
   };
 
-  const generateBatch = () => {
+  const uuids = useMemo(() => {
     const list: string[] = [];
     const count = Math.min(1000, Math.max(1, quantity));
     for (let i = 0; i < count; i++) {
       list.push(formatUuid(generateV4()));
     }
-    setUuids(list);
-  };
+    return list;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quantity, uppercase, removeHyphens, addBraces, refreshKey]);
 
-  useEffect(() => {
-    generateBatch();
-  }, [quantity, uppercase, removeHyphens, addBraces]);
+  const generateBatch = () => {
+    setRefreshKey((k) => k + 1);
+  };
 
   const handleCopyAll = async () => {
     if (uuids.length === 0) return;

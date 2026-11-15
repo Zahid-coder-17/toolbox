@@ -69,7 +69,7 @@ describe('Security Utilities', () => {
     it('creates and tracks object URLs', () => {
       const registry = new SafeUrlRegistry();
       // Mock createObjectURL
-      let revoked: string[] = [];
+      const revoked: string[] = [];
       const origCreate = URL.createObjectURL;
       const origRevoke = URL.revokeObjectURL;
       URL.createObjectURL = () => 'blob:mock-url-1';

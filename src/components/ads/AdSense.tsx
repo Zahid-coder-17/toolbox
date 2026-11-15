@@ -29,12 +29,8 @@ export function AdUnit({
   responsive = true,
   className = '',
 }: AdUnitProps) {
-  // If no AdSense publisher ID is configured, do not render intrusive placeholder ads
-  if (!CLIENT_ID || !slotId) {
-    return null;
-  }
-
   useEffect(() => {
+    if (!CLIENT_ID || !slotId) return;
     try {
       if (typeof window !== 'undefined') {
         // @ts-expect-error - adsbygoogle global queue
@@ -44,6 +40,11 @@ export function AdUnit({
       // Ignore adsbygoogle push error if script is blocked by ad blocker
     }
   }, [slotId]);
+
+  // If no AdSense publisher ID is configured, do not render intrusive placeholder ads
+  if (!CLIENT_ID || !slotId) {
+    return null;
+  }
 
   return (
     <aside

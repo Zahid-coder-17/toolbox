@@ -21,10 +21,17 @@ export function QrCodeGenerator() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    let active = true;
     if (!content.trim()) {
-      setDataUrl('');
-      setSvgString('');
-      return;
+      Promise.resolve().then(() => {
+        if (active) {
+          setDataUrl('');
+          setSvgString('');
+        }
+      });
+      return () => {
+        active = false;
+      };
     }
 
     // Generate PNG data URL
@@ -37,7 +44,9 @@ export function QrCodeGenerator() {
       width: size,
       margin: 2,
     })
-      .then((url) => setDataUrl(url))
+      .then((url) => {
+        if (active) setDataUrl(url);
+      })
       .catch((err) => console.error(err));
 
     // Generate SVG string
@@ -51,8 +60,14 @@ export function QrCodeGenerator() {
       width: size,
       margin: 2,
     })
-      .then((svg) => setSvgString(svg))
+      .then((svg) => {
+        if (active) setSvgString(svg);
+      })
       .catch((err) => console.error(err));
+
+    return () => {
+      active = false;
+    };
   }, [content, ecLevel, fgColor, bgColor, size]);
 
   const handleDownloadPng = () => {

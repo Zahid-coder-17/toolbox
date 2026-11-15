@@ -33,7 +33,7 @@ export function PdfCompressor() {
       const compressedBytes = await pdfDoc.save(saveOptions);
 
       // Create compressed blob (ensuring size savings simulation if identical)
-      let finalBytes = compressedBytes;
+      const finalBytes = compressedBytes;
       // If the original PDF already had object streams, calculate compressed blob
       const blob = new Blob([finalBytes as unknown as BlobPart], { type: 'application/pdf' });
       setCompressedBlob(blob);

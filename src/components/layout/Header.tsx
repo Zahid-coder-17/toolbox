@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Wrench, Search, Menu, X, ShieldCheck } from 'lucide-react';
-import { CATEGORIES } from '@/config/tools';
 import { QuickSearchModal } from '@/components/search/QuickSearchModal';
 import { cn } from '@/lib/utils';
 
@@ -23,11 +22,6 @@ export function Header() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-
-  // Close mobile menu on page change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
 
   const navLinks = [
     { name: 'Text', href: '/category/text' },
@@ -109,6 +103,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={cn(
                   'block px-3 py-2 text-base font-medium rounded-lg',
                   pathname.startsWith(link.href)
