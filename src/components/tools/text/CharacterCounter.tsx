@@ -11,14 +11,21 @@ export function CharacterCounter() {
   const [copied, setCopied] = useState(false);
 
   const metrics = useMemo(() => {
-    const total = text.length;
-    const noSpaces = text.replace(/\s/g, '').length;
-    const letters = (text.match(/[a-zA-Z]/g) || []).length;
-    const digits = (text.match(/[0-9]/g) || []).length;
-    const spaces = (text.match(/\s/g) || []).length;
-    const symbols = (text.match(/[^a-zA-Z0-9\s]/g) || []).length;
-    const words = (text.trim().match(/\b[^\s]+\b/g) || []).length;
-    const lines = text.split(/\n/).length;
+    // Fast Unicode code point counting without array allocation
+    let total = 0;
+    let noSpaces = 0;
+    for (const ch of text) {
+      total++;
+      if (!/\s/u.test(ch)) {
+        noSpaces++;
+      }
+    }
+    const letters = (text.match(/\p{L}/gu) || []).length;
+    const digits = (text.match(/\p{N}/gu) || []).length;
+    const spaces = (text.match(/\s/gu) || []).length;
+    const symbols = (text.match(/[^\p{L}\p{N}\s]/gu) || []).length;
+    const words = (text.trim().match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) || []).length;
+    const lines = text ? text.split(/\n/).length : 0;
 
     const platforms = [
       { name: 'X / Twitter Post', max: 280, current: total },
@@ -85,6 +92,13 @@ export function CharacterCounter() {
           <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Symbols</div>
         </div>
       </div>
+
+      {/* Large Input Performance Notification */}
+      {text.length > 50000 && (
+        <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-amber-800 flex items-center justify-between">
+          <span>Large text detected ({metrics.total.toLocaleString()} characters). Analysis running instantly in local browser memory.</span>
+        </div>
+      )}
 
       {/* Editor Card */}
       <Card>

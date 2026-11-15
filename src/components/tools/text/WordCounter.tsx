@@ -26,25 +26,38 @@ export function WordCounter() {
       };
     }
 
-    const wordsArray = trimmed.match(/\b[^\s]+\b/g) || [];
+    // Unicode-aware word matching supporting letters, numbers, hyphens and apostrophes
+    const wordsArray = trimmed.match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) || [];
     const words = wordsArray.length;
-    const characters = text.length;
-    const charactersNoSpaces = text.replace(/\s/g, '').length;
-    const sentences = (text.match(/[^.!?]+[.!?]+(\s|$)/g) || []).length || (trimmed.length > 0 ? 1 : 0);
+
+    // Fast Unicode code point counting without allocating massive arrays
+    let characters = 0;
+    let charactersNoSpaces = 0;
+    for (const ch of text) {
+      characters++;
+      if (!/\s/u.test(ch)) {
+        charactersNoSpaces++;
+      }
+    }
+
+    // Unicode sentence boundary detection
+    const sentenceMatches = text.match(/[^.!?\n]+[.!?]+(?:\s|$)/gu) || [];
+    const sentences = sentenceMatches.length || (trimmed.length > 0 ? 1 : 0);
+
     const paragraphs = text.split(/\n\s*\n/).filter((p) => p.trim().length > 0).length || (trimmed.length > 0 ? 1 : 0);
     const lines = text.split(/\n/).length;
 
-    const readingTimeMinutes = Math.ceil(words / 200);
-    const speakingTimeMinutes = Math.ceil(words / 130);
+    const readingTimeMinutes = Math.max(1, Math.ceil(words / 200));
+    const speakingTimeMinutes = Math.max(1, Math.ceil(words / 130));
 
-    // Keyword density
+    // Keyword density with Unicode letter support
     const stopWords = new Set([
       'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i', 'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at', 'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she', 'or', 'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what', 'so', 'up', 'out', 'if', 'about', 'who', 'get', 'which', 'go', 'me'
     ]);
 
     const frequencyMap: Record<string, number> = {};
     for (const w of wordsArray) {
-      const clean = w.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const clean = w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
       if (clean.length > 2 && !stopWords.has(clean)) {
         frequencyMap[clean] = (frequencyMap[clean] || 0) + 1;
       }
@@ -66,8 +79,8 @@ export function WordCounter() {
       sentences,
       paragraphs,
       lines,
-      readingTimeMinutes,
-      speakingTimeMinutes,
+      readingTimeMinutes: words > 0 ? readingTimeMinutes : 0,
+      speakingTimeMinutes: words > 0 ? speakingTimeMinutes : 0,
       keywords: sortedKeywords,
     };
   }, [text]);
@@ -124,6 +137,13 @@ export function WordCounter() {
           <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Lines</div>
         </div>
       </div>
+
+      {/* Large Input Performance Notification */}
+      {text.length > 50000 && (
+        <div className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-amber-800 flex items-center justify-between">
+          <span>Large text detected ({stats.characters.toLocaleString()} characters). Processing is running client-side with zero data leaving your device.</span>
+        </div>
+      )}
 
       {/* Main Text Area */}
       <Card>

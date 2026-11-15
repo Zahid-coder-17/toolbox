@@ -89,6 +89,23 @@ export function UuidGenerator() {
                     {num}
                   </Button>
                 ))}
+                <input
+                  id="uuid-qty"
+                  type="number"
+                  min={1}
+                  max={1000}
+                  value={quantity}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value, 10);
+                    if (!isNaN(val)) {
+                      setQuantity(Math.min(1000, Math.max(1, val)));
+                    } else {
+                      setQuantity(1);
+                    }
+                  }}
+                  className="w-16 h-8 text-xs text-center border border-slate-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono"
+                  aria-label="Custom UUID quantity"
+                />
               </div>
             </div>
 

@@ -17,8 +17,14 @@ export function SlugGenerator() {
   const slug = useMemo(() => {
     if (!text.trim()) return '';
 
-    // Normalize accents / diacritics
-    let str = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // Normalize ligatures, symbols, and accents / diacritics
+    let str = text
+      .replace(/ß/g, 'ss')
+      .replace(/æ/gi, 'ae')
+      .replace(/ø/gi, 'oe')
+      .replace(/&/g, ' and ')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
 
     if (lowercase) {
       str = str.toLowerCase();
@@ -48,16 +54,14 @@ export function SlugGenerator() {
       str = words.join(' ');
     }
 
-    // Replace non-alphanumeric with separator
-    str = str.replace(/[^a-zA-Z0-9]+/g, separator);
-
-    // Remove repeated separators
+    // Clean with letters and numbers (Unicode aware)
     const sepRegex = new RegExp(`\\${separator}+`, 'g');
-    str = str.replace(sepRegex, separator);
-
-    // Trim separators from start and end
     const trimRegex = new RegExp(`^\\${separator}+|\\${separator}+$`, 'g');
-    str = str.replace(trimRegex, '');
+
+    str = str
+      .replace(/[^\p{L}\p{N}]+/gu, separator)
+      .replace(sepRegex, separator)
+      .replace(trimRegex, '');
 
     return str;
   }, [text, separator, lowercase, removeStopWords, stripNumbers]);

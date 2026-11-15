@@ -165,17 +165,56 @@ export function TextDiffChecker() {
       {/* Diff Result Rendering */}
       <Card>
         <CardContent className="p-4 sm:p-6 space-y-3">
-          <div className="text-xs font-bold uppercase tracking-wider text-slate-500 pb-2 border-b border-slate-100">
-            Difference Visualizer
+          <div className="text-xs font-bold uppercase tracking-wider text-slate-500 pb-2 border-b border-slate-100 flex items-center justify-between">
+            <span>Difference Visualizer ({viewMode === 'split' ? 'Side-by-Side Comparison' : 'Unified Comparison'})</span>
           </div>
 
-          <div className="font-mono text-xs leading-relaxed overflow-x-auto rounded-lg bg-slate-900 p-4 text-slate-100 min-h-[200px]">
-            {diffResult.length === 0 || (!original && !modified) ? (
-              <div className="text-slate-500 py-8 text-center font-sans">
-                Enter text in both boxes above to see the comparison.
+          {diffResult.length === 0 || (!original && !modified) ? (
+            <div className="text-slate-500 py-8 text-center font-sans font-mono text-xs bg-slate-900 rounded-lg">
+              Enter text in both boxes above to see the comparison.
+            </div>
+          ) : viewMode === 'split' ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 font-mono text-xs leading-relaxed overflow-x-auto rounded-lg bg-slate-900 p-4 text-slate-100 min-h-[200px]">
+              {/* Left: Original with Deletions */}
+              <div className="border-r border-slate-800 pr-2 space-y-0.5">
+                <div className="text-[10px] text-slate-400 font-bold uppercase mb-2 border-b border-slate-800 pb-1">Original View</div>
+                {diffResult
+                  .filter((part) => !part.added)
+                  .map((part, index) => (
+                    <span
+                      key={index}
+                      className={
+                        part.removed
+                          ? 'bg-red-950/80 text-red-300 border-l-2 border-red-500 px-1 inline-block w-full line-through opacity-85'
+                          : 'text-slate-300 px-1 inline-block w-full'
+                      }
+                    >
+                      {part.value}
+                    </span>
+                  ))}
               </div>
-            ) : (
-              diffResult.map((part: Change, index: number) => {
+              {/* Right: Modified with Additions */}
+              <div className="pl-2 space-y-0.5">
+                <div className="text-[10px] text-slate-400 font-bold uppercase mb-2 border-b border-slate-800 pb-1">Modified View</div>
+                {diffResult
+                  .filter((part) => !part.removed)
+                  .map((part, index) => (
+                    <span
+                      key={index}
+                      className={
+                        part.added
+                          ? 'bg-emerald-950/80 text-emerald-300 border-l-2 border-emerald-500 px-1 inline-block w-full'
+                          : 'text-slate-300 px-1 inline-block w-full'
+                      }
+                    >
+                      {part.value}
+                    </span>
+                  ))}
+              </div>
+            </div>
+          ) : (
+            <div className="font-mono text-xs leading-relaxed overflow-x-auto rounded-lg bg-slate-900 p-4 text-slate-100 min-h-[200px]">
+              {diffResult.map((part: Change, index: number) => {
                 const color = part.added
                   ? 'bg-emerald-950 text-emerald-300 border-l-2 border-emerald-500 px-1 inline-block w-full'
                   : part.removed
@@ -187,9 +226,9 @@ export function TextDiffChecker() {
                     {part.value}
                   </span>
                 );
-              })
-            )}
-          </div>
+              })}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -23,72 +23,80 @@ export function CaseConverter() {
         result = text.toLowerCase();
         break;
 
-      case 'title':
+      case 'title': {
         const minorWords = new Set(['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'if', 'in', 'nor', 'of', 'on', 'or', 'so', 'the', 'to', 'up', 'yet']);
-        result = text.replace(/\w\S*/g, (txt, offset) => {
+        result = text.replace(/[\p{L}\p{N}]\S*/gu, (txt, offset) => {
           const lower = txt.toLowerCase();
           if (offset !== 0 && minorWords.has(lower)) {
             return lower;
           }
-          return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
+          const chars = Array.from(txt);
+          return chars[0].toUpperCase() + chars.slice(1).join('').toLowerCase();
         });
         break;
+      }
 
       case 'sentence':
         result = text
           .toLowerCase()
-          .replace(/(^\s*\w|[.!?]\s*\w)/g, (c) => c.toUpperCase());
+          .replace(/(^\s*[\p{L}]|[.!?]\s*[\p{L}])/gu, (c) => c.toUpperCase());
         break;
 
       case 'capitalized':
-        result = text.replace(/\b\w/g, (c) => c.toUpperCase());
+        result = text.replace(/(?:^|[^\p{L}\p{N}])([\p{L}])/gu, (match, letter) => {
+          return match.slice(0, match.length - letter.length) + letter.toUpperCase();
+        });
         break;
 
       case 'camel':
         result = text
-          .replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase())
-          .replace(/^([A-Z])/, (m) => m.toLowerCase());
+          .replace(/[^\p{L}\p{N}]+([\p{L}\p{N}])/gu, (_, chr) => chr.toUpperCase())
+          .replace(/^([\p{L}])/u, (m) => m.toLowerCase());
         break;
 
       case 'pascal':
         result = text
-          .replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase())
-          .replace(/^([a-z])/, (m) => m.toUpperCase());
+          .replace(/[^\p{L}\p{N}]+([\p{L}\p{N}])/gu, (_, chr) => chr.toUpperCase())
+          .replace(/^([\p{L}])/u, (m) => m.toUpperCase());
         break;
 
       case 'snake':
         result = text
           .trim()
-          .replace(/\s+/g, '_')
-          .replace(/[^\w]/g, '_')
+          .replace(/\s+/gu, '_')
+          .replace(/[^\p{L}\p{N}]/gu, '_')
           .replace(/__+/g, '_')
+          .replace(/^_+|_+$/g, '')
           .toLowerCase();
         break;
 
       case 'constant':
         result = text
           .trim()
-          .replace(/\s+/g, '_')
-          .replace(/[^\w]/g, '_')
+          .replace(/\s+/gu, '_')
+          .replace(/[^\p{L}\p{N}]/gu, '_')
           .replace(/__+/g, '_')
+          .replace(/^_+|_+$/g, '')
           .toUpperCase();
         break;
 
       case 'kebab':
         result = text
           .trim()
-          .replace(/\s+/g, '-')
-          .replace(/[^a-zA-Z0-9-]/g, '-')
+          .replace(/\s+/gu, '-')
+          .replace(/[^\p{L}\p{N}]/gu, '-')
           .replace(/--+/g, '-')
+          .replace(/^-+|-+$/g, '')
           .toLowerCase();
         break;
 
-      case 'alternating':
-        result = text
-          .split('')
+      case 'alternating': {
+        const chars = Array.from(text);
+        result = chars
           .map((char, index) => (index % 2 === 0 ? char.toLowerCase() : char.toUpperCase()))
           .join('');
         break;
+      }
 
       default:
         result = text;
