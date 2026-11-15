@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const securityHeaders = [
   {
@@ -33,10 +32,6 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: path.resolve(__dirname),
-  experimental: {
-    cpus: 1,
-  },
   async headers() {
     return [
       {
