@@ -10,7 +10,7 @@ import { copyToClipboard, downloadText } from '@/lib/utils';
 import { Download, Copy, Check, QrCode as QrIcon, Sparkles, AlertCircle } from 'lucide-react';
 
 export function QrCodeGenerator() {
-  const [content, setContent] = useState('https://toolbox.dev');
+  const [content, setContent] = useState('https://toolbox-1llw.vercel.app');
   const [ecLevel, setEcLevel] = useState<'L' | 'M' | 'Q' | 'H'>('M');
   const [fgColor, setFgColor] = useState('#0f172a');
   const [bgColor, setBgColor] = useState('#ffffff');

@@ -6,6 +6,10 @@ import { Button } from '@/components/ui/button';
 export default function NotFound() {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-16">
+      <head>
+        <title>404 — Page Not Found | ToolBox</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
       <div className="text-6xl font-black text-blue-600 mb-2">404</div>
       <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3">
         Page or Utility Not Found

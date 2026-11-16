@@ -40,9 +40,9 @@ export function WordCounter() {
       }
     }
 
-    // Unicode sentence boundary detection
-    const sentenceMatches = text.match(/[^.!?\n]+[.!?]+(?:\s|$)/gu) || [];
-    const sentences = sentenceMatches.length || (trimmed.length > 0 ? 1 : 0);
+    // Safe sentence boundary counting without catastrophic backtracking
+    const sentenceMatches = text.match(/[.!?]+(?:\s+|$)/g);
+    const sentences = (sentenceMatches ? sentenceMatches.length : 0) + (trimmed.length > 0 && !/[.!?]\s*$/.test(trimmed) ? 1 : 0);
 
     const paragraphs = text.split(/\n\s*\n/).filter((p) => p.trim().length > 0).length || (trimmed.length > 0 ? 1 : 0);
     const lines = text.split(/\n/).length;

@@ -1,7 +1,7 @@
 import { ToolDefinition, FAQItem, ToolCategory, CategoryDefinition } from '@/config/tools';
 
 export function getSiteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolbox.dev';
+  const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolbox-1llw.vercel.app';
   return url.replace(/\/+$/, '');
 }
 
