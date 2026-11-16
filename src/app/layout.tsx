@@ -7,7 +7,16 @@ import { GoogleAnalyticsScript } from '@/components/analytics/GoogleAnalytics';
 import { ConsentManager } from '@/components/consent/ConsentManager';
 import { getSiteUrl } from '@/lib/seo';
 
-const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+function parseGoogleVerificationToken(val?: string): string | undefined {
+  if (!val) return undefined;
+  const trimmed = val.trim();
+  if (!trimmed) return undefined;
+  // If the complete HTML meta tag was pasted into the environment variable, extract the content token
+  const contentMatch = trimmed.match(/content=["']([^"']+)["']/i);
+  return (contentMatch ? contentMatch[1] : trimmed).trim() || undefined;
+}
+
+const googleVerification = parseGoogleVerificationToken(process.env.GOOGLE_SITE_VERIFICATION);
 
 export const metadata: Metadata = {
   ...(googleVerification

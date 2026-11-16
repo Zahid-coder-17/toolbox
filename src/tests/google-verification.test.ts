@@ -39,4 +39,12 @@ describe('Layout Metadata & Google Verification', () => {
     const { metadata } = await import('@/app/layout');
     expect(metadata.verification).toBeUndefined();
   });
+
+  it('extracts token when full HTML meta tag is supplied in GOOGLE_SITE_VERIFICATION', async () => {
+    process.env.GOOGLE_SITE_VERIFICATION =
+      '<meta name="google-site-verification" content="qf7HT7T3pytnY-zGWN3M0FPJDApE-jKAU8K5HDHcFJ0" />';
+    const { metadata } = await import('@/app/layout');
+    expect(metadata.verification).toBeDefined();
+    expect(metadata.verification?.google).toBe('qf7HT7T3pytnY-zGWN3M0FPJDApE-jKAU8K5HDHcFJ0');
+  });
 });
