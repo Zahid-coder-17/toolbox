@@ -36,7 +36,6 @@ export function generateOrganizationSchema() {
     logo: `${siteUrl}/logo.png`,
     description:
       'Provider of free, privacy-first online browser utilities for developers, designers, and professionals.',
-    sameAs: [],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Support',
