@@ -7,7 +7,12 @@ import { GoogleAnalyticsScript } from '@/components/analytics/GoogleAnalytics';
 import { ConsentManager } from '@/components/consent/ConsentManager';
 import { getSiteUrl } from '@/lib/seo';
 
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
+  ...(googleVerification
+    ? { verification: { google: googleVerification } }
+    : {}),
   metadataBase: new URL(getSiteUrl()),
   alternates: {
     canonical: '/',
@@ -76,9 +81,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
-    : undefined,
 };
 
 export default function RootLayout({
