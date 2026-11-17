@@ -251,7 +251,7 @@ export default function SEODashboardPage() {
                   <th className="p-3">Category</th>
                   <th className="p-3">Monthly Volume (Est)</th>
                   <th className="p-3">Search Intent</th>
-                  <th className="p-3">Avg Position</th>
+                  <th className="p-3">Avg Position (Est / Target)</th>
                   <th className="p-3">Status</th>
                 </tr>
               </thead>

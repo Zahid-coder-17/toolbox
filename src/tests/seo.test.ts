@@ -286,6 +286,9 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
       const robotConfig = robots();
       expect(robotConfig.rules).toBeDefined();
       expect(robotConfig.sitemap).toBe(`${getSiteUrl()}/sitemap.xml`);
+      const rules = Array.isArray(robotConfig.rules) ? robotConfig.rules[0] : robotConfig.rules;
+      expect(rules.disallow).toContain('/api/');
+      expect(rules.disallow).toContain('/admin/');
     });
   });
 });
