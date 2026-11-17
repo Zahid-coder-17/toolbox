@@ -244,8 +244,8 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
       const urls = entries.map((e) => e.url);
       const siteUrl = getSiteUrl();
 
-      // Check root
-      expect(urls).toContain(`${siteUrl}/`);
+      // Check root (matches canonical domain)
+      expect(urls.includes(siteUrl) || urls.includes(`${siteUrl}/`)).toBe(true);
 
       // Check all 4 categories
       Object.values(CATEGORIES).forEach((cat) => {

@@ -28,7 +28,7 @@ export async function generateMetadata({
     return { title: 'Guide Not Found' };
   }
 
-  const title = `${article.title} — ToolBox Guides`;
+  const title = article.title;
   const canonical = getCanonicalUrl(`/blog/${article.slug}`);
 
   return {
