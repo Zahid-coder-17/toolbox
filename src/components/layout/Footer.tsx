@@ -54,6 +54,14 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li className="pt-1">
+                <Link
+                  href="/blog"
+                  className="text-blue-600 font-semibold hover:underline"
+                >
+                  Guides &amp; Tutorials →
+                </Link>
+              </li>
             </ul>
           </div>
 

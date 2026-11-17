@@ -1,0 +1,34 @@
+URL,Primary Target Keyword,Secondary Target Keywords,Search Intent,Canonical Status,Content Type,Category
+https://toolbox-1llw.vercel.app/,free online tools,privacy first online utilities,Transactional,Canonical,Homepage,Core
+https://toolbox-1llw.vercel.app/category/text,online text tools,free text utilities,Navigational / Transactional,Canonical,Category Hub,Text
+https://toolbox-1llw.vercel.app/category/image,online image tools,browser image utilities,Navigational / Transactional,Canonical,Category Hub,Image
+https://toolbox-1llw.vercel.app/category/pdf,secure pdf tools,private pdf utilities online,Navigational / Transactional,Canonical,Category Hub,PDF
+https://toolbox-1llw.vercel.app/category/calculators,online financial calculators,free math calculators,Navigational / Transactional,Canonical,Category Hub,Calculators
+https://toolbox-1llw.vercel.app/tools/text/word-counter,word counter,word count online character count reading time,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/character-counter,character counter,count characters letters spaces tweet length,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/case-converter,case converter,uppercase lowercase title case camelcase,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/json-formatter,json formatter,json beautifier prettify json validator,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/base64-encoder-decoder,base64 encoder,base64 decoder text to base64 utf8,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/text-diff-checker,text diff checker,compare text online difference checker,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/slug-generator,slug generator,url slug creator seo friendly slug,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/text/uuid-generator,uuid generator,v4 uuid generator guid creator online,Transactional,Canonical,Interactive Tool,Text
+https://toolbox-1llw.vercel.app/tools/image/image-compressor,image compressor,compress image online reduce image size,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/image-resizer,image resizer,resize photo online change dimensions,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/jpg-to-png,jpg to png,convert jpeg to png online transparent,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/png-to-webp,png to webp,convert png to webp compress webp,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/heic-to-jpg,heic to jpg,convert iphone heic to jpg in browser,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/qr-code-generator,qr code generator,create qr code online custom qr maker,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/favicon-generator,favicon generator,create favicon ico apple touch icon,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/image/color-picker,color picker,hex color picker eyedropper rgb finder,Transactional,Canonical,Interactive Tool,Image
+https://toolbox-1llw.vercel.app/tools/pdf/pdf-compressor,pdf compressor,compress pdf online reduce pdf size,Transactional,Canonical,Interactive Tool,PDF
+https://toolbox-1llw.vercel.app/tools/pdf/pdf-merger,pdf merger,combine pdfs merge pdf files join pages,Transactional,Canonical,Interactive Tool,PDF
+https://toolbox-1llw.vercel.app/tools/pdf/pdf-splitter,pdf splitter,split pdf pages extract pdf online,Transactional,Canonical,Interactive Tool,PDF
+https://toolbox-1llw.vercel.app/tools/pdf/pdf-to-jpg,pdf to jpg,convert pdf to image high resolution,Transactional,Canonical,Interactive Tool,PDF
+https://toolbox-1llw.vercel.app/tools/calculators/age-calculator,age calculator,calculate exact age chronological birthday,Transactional,Canonical,Interactive Tool,Calculators
+https://toolbox-1llw.vercel.app/tools/calculators/percentage-calculator,percentage calculator,calculate percentage percent change difference,Transactional,Canonical,Interactive Tool,Calculators
+https://toolbox-1llw.vercel.app/tools/calculators/emi-calculator,emi calculator,loan emi calculator monthly amortization table,Transactional,Canonical,Interactive Tool,Calculators
+https://toolbox-1llw.vercel.app/tools/calculators/compound-interest-calculator,compound interest calculator,investment growth future value monthly contribution,Transactional,Canonical,Interactive Tool,Calculators
+https://toolbox-1llw.vercel.app/blog/how-to-compress-images-without-losing-quality,how to compress images without losing quality,image compression guide webp png jpg quality,Informational,Canonical,Educational Guide,Image
+https://toolbox-1llw.vercel.app/blog/guide-to-merging-pdfs-securely,how to merge pdfs securely,merge confidential pdf files browser client side,Informational,Canonical,Educational Guide,PDF
+https://toolbox-1llw.vercel.app/blog/understanding-loan-emi-amortization,how is emi calculated,reducing balance emi formula loan amortization,Informational,Canonical,Educational Guide,Calculators
+https://toolbox-1llw.vercel.app/blog/calculating-reading-time-and-speaking-speed,how to calculate reading time,speaking speed words per minute speech timer,Informational,Canonical,Educational Guide,Text

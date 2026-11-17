@@ -105,16 +105,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Is my text sent to any server?',
-        answer: 'No. All calculations run strictly in your web browser. Your text never leaves your device.',
+        question: 'What is the Word Counter tool?',
+        answer: 'The Word Counter is a real-time text analysis utility that measures words, characters, sentences, paragraphs, and reading times directly in your browser. It helps writers, students, translators, and SEO specialists adhere to strict character and length limits.',
       },
       {
-        question: 'How is reading time calculated?',
-        answer: 'Reading time is computed using the global average adult silent reading rate of 200 words per minute.',
+        question: 'How does the Word Counter calculate word count?',
+        answer: 'It uses Unicode-aware regular expression tokenization supporting alphabets, digits, hyphens, and apostrophes across multiple languages. Contractions such as don\'t or hyphenated phrases like state-of-the-art are counted accurately according to standard editorial guidelines.',
       },
       {
-        question: 'Does it count spaces in character counts?',
-        answer: 'Yes, both metrics are displayed: total characters with spaces, and characters excluding spaces.',
+        question: 'Is there any character or text length limit?',
+        answer: 'No. Processing occurs in your local browser runtime memory. You can analyze essays, articles, or large book chapters consisting of tens of thousands of words without server timeout errors or bandwidth constraints.',
+      },
+      {
+        question: 'Is my text data private and secure?',
+        answer: 'Yes, 100% private. Your text is processed strictly within client-side memory. No documents, paragraphs, or snippets are ever uploaded, logged, or transmitted across external networks.',
+      },
+      {
+        question: 'How are reading and speaking times estimated?',
+        answer: 'Silent reading time is estimated using the global adult average rate of 200 words per minute. Speaking duration is computed at 130 words per minute, which represents standard conversational presentation pace.',
+      },
+      {
+        question: 'What is the Keyword Density feature?',
+        answer: 'The keyword density analysis identifies recurring words in your text and calculates their occurrence percentage. It automatically excludes common English stop words to reveal genuine topical focus for SEO writing.',
+      },
+      {
+        question: 'Can I use the Word Counter on mobile devices?',
+        answer: 'Yes. The interface is fully responsive on smartphones, tablets, and desktop browsers, featuring touch-friendly copy, clear, and download actions.',
+      },
+      {
+        question: 'Can I export or download my text analysis?',
+        answer: 'Yes. You can copy the entire text to your clipboard with one click or download it directly as a formatted plain text (.txt) file.',
       },
     ],
     metaTitle: 'Free Online Word Counter — Words, Characters & Reading Time',
@@ -146,12 +166,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'What is the standard SMS character limit?',
-        answer: 'A standard single SMS message is limited to 160 GSM-7 characters. Messages exceeding this are split.',
+        question: 'What is the Character Counter tool?',
+        answer: 'The Character Counter calculates exact character metrics, including total characters, characters without spaces, syllables, and real-time social platform limit meters for Twitter, LinkedIn, SMS, and Instagram.',
       },
       {
-        question: 'What is the optimal SEO title length?',
-        answer: 'Google typically displays up to 55 to 60 characters before truncating search result titles.',
+        question: 'Does the Character Counter count spaces?',
+        answer: 'The tool displays two distinct counts: Total Characters (including whitespaces, line breaks, and tabs) and Characters Without Spaces, giving you precision for academic and publishing guidelines.',
+      },
+      {
+        question: 'How are emojis and Unicode symbols counted?',
+        answer: 'Emojis and multi-byte Unicode glyphs are accurately parsed by surrogate pair boundaries. While some systems count emojis as multiple bytes, our counter measures true visual code point symbols.',
+      },
+      {
+        question: 'What social media character limits are tracked?',
+        answer: 'The tool tracks real-time progress bars for X / Twitter posts (280 characters), SMS messages (160 characters), LinkedIn status updates (3,000 characters), and Instagram captions (2,200 characters).',
+      },
+      {
+        question: 'Is registration or payment required?',
+        answer: 'No. The tool is completely free with no user accounts, subscriptions, or credit card requirements.',
+      },
+      {
+        question: 'Is my text stored anywhere?',
+        answer: 'No. The tool operates client-side with zero remote database persistence. Clearing the editor or closing your browser tab permanently purges all typed content from memory.',
+      },
+      {
+        question: 'Does it count line breaks and paragraphs?',
+        answer: 'Yes. Line breaks count as single character returns, and the paragraph analyzer measures paragraph density alongside standard metrics.',
+      },
+      {
+        question: 'Can I use it offline?',
+        answer: 'Yes. Once the web application is loaded in your browser, the character counting scripts operate entirely locally without an active internet connection.',
       },
     ],
     metaTitle: 'Free Character Counter — Social Media Limits & Letter Breakdown',
@@ -182,12 +226,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'How does Title Case handle articles and prepositions?',
-        answer: 'Title Case capitalizes principal words while leaving standard minor words (like "of", "and", "in") lowercase unless they start the sentence.',
+        question: 'What text cases can this tool convert?',
+        answer: 'The Case Converter transforms text into UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, and kebab-case instantly with a single click.',
       },
       {
-        question: 'Can I convert code identifiers?',
-        answer: 'Yes! camelCase, PascalCase, snake_case, and kebab-case are tailored specifically for clean code variable transformations.',
+        question: 'How does Title Case conversion work?',
+        answer: 'Title Case capitalizes the primary words while automatically keeping minor words (such as in, on, of, the, and, a) in lowercase unless they appear at the very start of a sentence or heading.',
+      },
+      {
+        question: 'Does it support code formats like snake_case and camelCase?',
+        answer: 'Yes. It strips punctuation and joins word tokens with underscores for snake_case or standard uppercase letter transitions for camelCase and PascalCase, ideal for developers.',
+      },
+      {
+        question: 'Will it work on accents and international alphabets?',
+        answer: 'Yes. The conversion engine uses standard Unicode uppercase and lowercase mappings, preserving accents, umlauts, and non-Latin alphabets like Spanish, French, and German characters.',
+      },
+      {
+        question: 'Is there a limit on how much text I can convert?',
+        answer: 'There is no server limit. You can paste and convert entire code documents, essays, or CSV files within the capacity of your device memory.',
+      },
+      {
+        question: 'Is my text uploaded to a server?',
+        answer: 'No. All string manipulations execute in JavaScript running in your local browser sandbox without server interaction.',
+      },
+      {
+        question: 'Can I copy the converted text easily?',
+        answer: 'Yes. Each case card provides a dedicated one-click Copy button with immediate visual feedback so you can paste it directly into your code editor or document.',
+      },
+      {
+        question: 'Can I convert text back to its original form?',
+        answer: 'Yes, by pasting your text again or selecting your preferred previous case format. We recommend saving original copies before making permanent bulk transformations.',
       },
     ],
     metaTitle: 'Free Case Converter — UPPERCASE, Title Case, camelCase & More',
@@ -220,12 +288,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Are there file size limits?',
-        answer: 'Because all parsing happens client-side in your browser, it comfortably handles multi-megabyte JSON files without network latency.',
+        question: 'What is the JSON Formatter & Validator?',
+        answer: 'The JSON Formatter is a developer utility that parses, formats, indents, minifies, and validates JSON payloads. It highlights syntax errors with precise line and column indicators.',
       },
       {
-        question: 'Does this tool validate trailing commas?',
-        answer: 'Yes, strict JSON standards disallow trailing commas and unquoted keys. The validator flags them immediately.',
+        question: 'How does the JSON validator locate errors?',
+        answer: 'When invalid JSON is parsed, the engine catches syntax exceptions and outputs the exact character position and line number where an unclosed quote, trailing comma, or invalid token occurred.',
+      },
+      {
+        question: 'Can it handle minification for production payloads?',
+        answer: 'Yes. You can switch between 2-space indentation, 4-space indentation, and compact Minified output to reduce payload size before API transmissions.',
+      },
+      {
+        question: 'Is it safe to format proprietary JSON data?',
+        answer: 'Yes. Traditional web formatters send your JSON strings to remote servers. ToolBox parses and validates everything locally in client memory, keeping API keys, tokens, and confidential customer payloads safe.',
+      },
+      {
+        question: 'Can it parse nested arrays and objects?',
+        answer: 'Yes. It supports deep nested JSON objects, arrays of mixed types, Unicode strings, boolean values, null values, and scientific notation numbers.',
+      },
+      {
+        question: 'Does it support downloading the formatted JSON?',
+        answer: 'Yes. You can download the formatted output directly as a .json file with UTF-8 character encoding or copy it to your clipboard.',
+      },
+      {
+        question: 'Why do trailing commas fail validation?',
+        answer: 'Strict JSON syntax (RFC 8259) prohibits trailing commas after the final key-value pair or array element. The validator flags them to prevent runtime crashes in downstream APIs.',
+      },
+      {
+        question: 'Can I format large JSON files?',
+        answer: 'Yes. It easily formats multi-megabyte JSON files. For exceptionally large inputs, processing runs in a non-blocking queue to prevent browser freezes.',
       },
     ],
     metaTitle: 'Free JSON Formatter & Validator — Beautify & Minify JSON',
@@ -256,12 +348,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Why do non-ASCII characters sometimes break in other Base64 tools?',
-        answer: 'Standard browser atob/btoa functions only support Latin1. Our implementation properly uses UTF-8 byte encoders so international characters remain intact.',
+        question: 'What is Base64 encoding?',
+        answer: 'Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format using 64 printable characters, ensuring safe data transmission across text-only protocols.',
       },
       {
-        question: 'Can I encode images to Data URIs?',
-        answer: 'Yes! Upload any image in File mode to get a ready-to-use data:image/*;base64 string for HTML and CSS.',
+        question: 'Does this tool support Unicode and UTF-8 characters?',
+        answer: 'Yes. Many naive Base64 tools fail or corrupt text when processing emojis or foreign alphabets. Our engine utilizes UTF-8 byte stream encoding prior to Base64 conversion to preserve character fidelity.',
+      },
+      {
+        question: 'How does the live mode switch between Encode and Decode work?',
+        answer: 'You can toggle between Encode and Decode modes seamlessly. In Encode mode, plain text is transformed into Base64; in Decode mode, valid Base64 is converted back into readable text.',
+      },
+      {
+        question: 'What happens if I enter invalid Base64 in Decode mode?',
+        answer: 'The parser detects non-Base64 characters or invalid padding lengths and displays an inline warning banner explaining the decoding issue without crashing.',
+      },
+      {
+        question: 'Is Base64 considered encryption?',
+        answer: 'No. Base64 is an encoding format, not encryption. Anyone can decode Base64 data back to plain text. Do not use Base64 alone to protect confidential passwords or secrets.',
+      },
+      {
+        question: 'Is my encoded or decoded text secure?',
+        answer: 'Yes. Processing is executed entirely in your browser memory. No tokens or decoded strings are ever transmitted to an external logging server.',
+      },
+      {
+        question: 'Can I download the converted result?',
+        answer: 'Yes. You can copy the result directly or download it as a plain text file.',
+      },
+      {
+        question: 'Does this tool work offline?',
+        answer: 'Yes. Once loaded, the Base64 encoding and decoding algorithms work without an active internet connection.',
       },
     ],
     metaTitle: 'Free Base64 Encoder & Decoder — Text and File Converter',
@@ -292,12 +408,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Is my confidential source code uploaded to any server?',
-        answer: 'Never. Diff computation runs directly within your browser JavaScript engine using the Myers diff algorithm.',
+        question: 'What is the Text Diff Checker?',
+        answer: 'The Text Diff Checker compares two passages of text or code and highlights additions, deletions, and modifications using character and word-level diff algorithms.',
       },
       {
-        question: 'Can I swap the two inputs?',
-        answer: 'Yes, click the Swap button to invert original and modified texts instantly.',
+        question: 'What comparison modes are supported?',
+        answer: 'You can inspect differences in Split (side-by-side) mode or Unified (inline) mode, and choose between word-level or line-level comparison granularity.',
+      },
+      {
+        question: 'How are additions and deletions highlighted?',
+        answer: 'Additions are highlighted with soft green backgrounds and plus badges, while deleted or replaced text is highlighted with soft red backgrounds and minus badges.',
+      },
+      {
+        question: 'Is it safe to compare confidential code or contracts?',
+        answer: 'Yes. Unlike cloud diff checkers, both passages remain entirely on your local machine. No diff queries or document drafts are sent to external databases.',
+      },
+      {
+        question: 'Can I swap the original and modified passages?',
+        answer: 'Yes. A dedicated Swap button allows you to invert the comparison direction instantly without manually cutting and pasting text.',
+      },
+      {
+        question: 'Does it count total differences?',
+        answer: 'Yes. A summary bar displays the exact number of additions, deletions, and unchanged lines detected between the two inputs.',
+      },
+      {
+        question: 'Can I compare code snippets in different languages?',
+        answer: 'Yes. The diff algorithm compares raw text characters and tokens, making it effective for Python, JavaScript, HTML, SQL, markdown, or natural language prose.',
+      },
+      {
+        question: 'Is there a file upload option?',
+        answer: 'You can paste directly into the two split text areas or drag and drop text from your clipboard.',
       },
     ],
     metaTitle: 'Free Text Diff Checker — Compare Text & Code Differences Online',
@@ -330,11 +470,35 @@ export const TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'What is a URL slug?',
-        answer: 'A slug is the human-readable, hyphenated end part of a web address that identifies a particular page (e.g., /tools/text/slug-generator).',
+        answer: 'A URL slug is the human-readable, hyphen-separated portion of a web address that identifies a specific page in a search engine friendly format (e.g., /blog/seo-guide).',
       },
       {
-        question: 'Why are hyphens preferred over underscores for SEO?',
-        answer: 'Major search engines like Google treat hyphens as word separators, whereas underscores may concatenate words together.',
+        question: 'How does the Slug Generator sanitize text?',
+        answer: 'It converts characters to lowercase, replaces spaces with hyphens, strips punctuation, and normalizes international diacritics (like turning é into e) to ensure URL compatibility.',
+      },
+      {
+        question: 'Can I choose a separator other than a hyphen?',
+        answer: 'Yes. You can select between standard hyphens (-), underscores (_), dots (.), or empty concatenation.',
+      },
+      {
+        question: 'Does it remove English stop words?',
+        answer: 'Yes. You can toggle the Stop Words Filter to automatically remove common filler words (like the, and, in, of, a) to produce cleaner, more concise SEO URLs.',
+      },
+      {
+        question: 'Does it handle non-Latin alphabets?',
+        answer: 'Yes. Non-Latin scripts (such as Cyrillic, Greek, or Arabic) are transliterated or preserved into URL-encoded tokens depending on the chosen configuration.',
+      },
+      {
+        question: 'Is registration required?',
+        answer: 'No. You can generate unlimited slugs for blog posts, products, or documentation pages completely free.',
+      },
+      {
+        question: 'Is my input text stored?',
+        answer: 'No. Everything runs immediately inside your browser session with zero server data retention.',
+      },
+      {
+        question: 'Can I copy the generated slug quickly?',
+        answer: 'Yes. A one-click copy button immediately transfers the sanitized slug to your clipboard.',
       },
     ],
     metaTitle: 'Free Slug Generator — Create SEO-Friendly URL Slugs Online',
@@ -365,12 +529,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'What is a Version 4 UUID?',
-        answer: 'A Version 4 UUID is a 128-bit universally unique identifier generated using random numbers, with an astronomically low collision probability (1 in 2^122).',
+        question: 'What is a UUID v4?',
+        answer: 'A UUID (Universally Unique Identifier) version 4 is a 128-bit identifier generated using cryptographically strong pseudo-random numbers (RFC 4122) with negligible probability of duplication.',
       },
       {
-        question: 'Is this secure for production IDs and database keys?',
-        answer: 'Yes. It uses window.crypto.getRandomValues(), the modern standard for cryptographic randomness in web browsers.',
+        question: 'How does this tool generate secure UUIDs?',
+        answer: 'It utilizes the native browser Web Crypto API (crypto.getRandomValues), providing cryptographically secure randomness generated directly by your device hardware.',
+      },
+      {
+        question: 'Can I generate multiple UUIDs at once?',
+        answer: 'Yes. You can generate bulk batches from 1 up to 1,000 UUIDs simultaneously with instant generation and copy capabilities.',
+      },
+      {
+        question: 'What formatting options are available?',
+        answer: 'You can toggle uppercase formatting, hyphen removal (clean 32-character hex strings), or wrapping UUIDs in curly braces for registry/database configurations.',
+      },
+      {
+        question: 'Are generated UUIDs stored or tracked?',
+        answer: 'No. Because they are generated in-memory via client-side Web Crypto, neither ToolBox nor any third party has a record of the identifiers created.',
+      },
+      {
+        question: 'What is the chance of two UUID v4 collisions?',
+        answer: 'The probability of generating a duplicate UUID v4 is approximately 1 in 2.71 quintillion, making collisions virtually impossible for practical database primary keys.',
+      },
+      {
+        question: 'Can I download the batch of UUIDs?',
+        answer: 'Yes. You can download the generated list as a formatted text (.txt) file or copy all UUIDs to your clipboard.',
+      },
+      {
+        question: 'Does the tool work offline?',
+        answer: 'Yes. The Web Crypto API is built into all modern browsers and functions without an active network connection.',
       },
     ],
     metaTitle: 'Free UUID Generator — Bulk RFC 4122 v4 UUIDs Online',
@@ -405,12 +593,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Will image compression affect my SEO?',
-        answer: 'Yes, positively! Smaller images load faster, improving Core Web Vitals (LCP) and search engine rankings.',
+        question: 'How does the Image Compressor reduce file size?',
+        answer: 'It applies intelligent lossy and lossless Canvas encoding, optimizing DCT matrices and stripping unneeded image metadata (EXIF) to minimize file size while preserving visual fidelity.',
       },
       {
-        question: 'Are my photos saved on a server?',
-        answer: 'No. The compression algorithm executes locally using HTML5 Canvas APIs within your browser.',
+        question: 'Are my photos uploaded to a cloud server?',
+        answer: 'No. All image decoding, rendering, and compression occurs locally in your browser using HTML5 Canvas APIs and Web Workers. Your personal photos never leave your device.',
+      },
+      {
+        question: 'What image formats can I compress?',
+        answer: 'The tool supports JPEG, JPG, PNG, and WebP images. You can adjust the quality slider to find the optimal balance between visual clarity and file size reduction.',
+      },
+      {
+        question: 'Can I compare the before and after image quality?',
+        answer: 'Yes. The interface shows the original file size, compressed file size, compression ratio percentage, and side-by-side visual previews.',
+      },
+      {
+        question: 'Does compression change image pixel dimensions?',
+        answer: 'No. Unless you explicitly choose to resize the image in the Image Resizer, the Image Compressor preserves original width and height dimensions.',
+      },
+      {
+        question: 'Is there a file count or size limit?',
+        answer: 'Because operations execute inside your device RAM, there are no artificial hourly limits or queue delays. You can compress multiple photos consecutively.',
+      },
+      {
+        question: 'How much file size reduction can I expect?',
+        answer: 'Typical JPEG and PNG photos see file size reductions of 40% to 80% with negligible loss of perceptible visual quality.',
+      },
+      {
+        question: 'Can I use this tool on my iPhone or Android device?',
+        answer: 'Yes. The compressor is optimized for mobile touchscreens and modern mobile browser hardware acceleration.',
       },
     ],
     metaTitle: 'Free Online Image Compressor — Reduce JPG, PNG & WebP File Size',
@@ -442,12 +654,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Can I enlarge an image without losing quality?',
-        answer: 'Upscaling raster images beyond original dimensions inherently causes slight blurriness, but canvas smoothing maintains smooth edges.',
+        question: 'How does the Image Resizer work?',
+        answer: 'The Image Resizer recalculates pixel dimensions using high-quality bi-cubic Canvas interpolation, enabling you to scale images by exact pixel width/height or by percentage.',
       },
       {
-        question: 'Does aspect ratio lock keep my image proportional?',
-        answer: 'Yes. Changing width automatically recalculates height proportionately when locked.',
+        question: 'Can I lock the aspect ratio?',
+        answer: 'Yes. You can lock the aspect ratio with the link toggle, so modifying the width automatically updates the height proportionally, preventing image distortion.',
+      },
+      {
+        question: 'Are my images kept private?',
+        answer: 'Yes. The resizing process runs entirely on your local CPU/GPU using browser Canvas buffers. No image bytes are sent over the internet.',
+      },
+      {
+        question: 'What are standard preset dimensions available?',
+        answer: 'The tool provides quick presets for social media platforms, including Instagram square (1080x1080), YouTube thumbnail (1280x720), and standard web banners.',
+      },
+      {
+        question: 'Can I enlarge an image without pixelation?',
+        answer: 'You can increase pixel dimensions, but raster images will lose some sharpness. For best results, scale down or use original high-resolution captures.',
+      },
+      {
+        question: 'What output formats can I export?',
+        answer: 'You can export your resized image as PNG, JPEG, or WebP format with customizable output quality settings.',
+      },
+      {
+        question: 'Is registration or payment required?',
+        answer: 'No. The tool is 100% free with unlimited resize operations.',
+      },
+      {
+        question: 'Can I download the resized image immediately?',
+        answer: 'Yes. A single click initiates an instant download to your computer or mobile downloads folder.',
       },
     ],
     metaTitle: 'Free Image Resizer — Resize Photos by Pixels or Percentage',
@@ -478,12 +714,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Why convert JPG to PNG?',
-        answer: 'PNG is a lossless format ideal for screenshots, text, line art, and graphics where JPEG compression artifacts would cause blur.',
+        question: 'What is the benefit of converting JPG to PNG?',
+        answer: 'PNG uses lossless compression and supports 24-bit transparent alpha channels, making it ideal for graphics, logos, illustrations, and images requiring sharp edges.',
       },
       {
-        question: 'Does converting JPG to PNG create transparency?',
-        answer: 'No, original JPGs do not contain alpha transparency. The converted PNG preserves the original image background.',
+        question: 'Does converting JPG to PNG restore transparency?',
+        answer: 'JPG files do not inherently store alpha transparency. Converting a JPG to PNG wraps the raster pixels in a lossless PNG container, allowing you to edit transparency in graphics software.',
+      },
+      {
+        question: 'Is the conversion performed on a remote server?',
+        answer: 'No. All color conversion and PNG encoding execute locally in your web browser. Your images remain strictly confidential on your computer.',
+      },
+      {
+        question: 'Will the converted PNG file be larger than the JPG?',
+        answer: 'Yes, in many cases PNG files are larger than JPGs because PNG uses lossless compression that preserves exact pixel values without DCT approximation.',
+      },
+      {
+        question: 'Can I convert multiple JPG files?',
+        answer: 'Yes. You can load and convert multiple images sequentially without upload wait queues or subscription gates.',
+      },
+      {
+        question: 'Does it preserve image metadata?',
+        answer: 'The conversion focuses on visual raster integrity. Camera EXIF data is stripped during canvas re-encoding, which actually enhances privacy and reduces unnecessary file weight.',
+      },
+      {
+        question: 'Does this work on mobile phones?',
+        answer: 'Yes. You can select photos directly from your iPhone photo library or Android gallery and save the PNG file instantly.',
+      },
+      {
+        question: 'Is there a quality loss when converting to PNG?',
+        answer: 'No. Canvas pixel rendering into PNG format is mathematically lossless, preserving every color coordinate of the source photo.',
       },
     ],
     metaTitle: 'Free JPG to PNG Converter — Convert JPEG to Lossless PNG Online',
@@ -514,12 +774,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Do all modern browsers support WebP?',
-        answer: 'Yes! Modern versions of Chrome, Safari, Firefox, Edge, and mobile browsers offer universal WebP support.',
+        question: 'Why should I convert PNG to WebP?',
+        answer: 'Google WebP offers superior compression, delivering file sizes 25% to 40% smaller than PNG while maintaining transparent alpha channels, accelerating page speed and boosting Core Web Vitals.',
       },
       {
         question: 'Does WebP support transparency?',
-        answer: 'Yes, WebP supports full 8-bit alpha transparency just like PNG, but with significantly smaller file sizes.',
+        answer: 'Yes. WebP fully supports 8-bit alpha transparency alongside both lossy and lossless compression modes.',
+      },
+      {
+        question: 'Is my image uploaded to an external server?',
+        answer: 'No. The conversion is handled client-side using browser-native WebP canvas encoders, ensuring immediate processing and total privacy.',
+      },
+      {
+        question: 'Do all modern web browsers support WebP?',
+        answer: 'Yes. WebP is natively supported in Google Chrome, Apple Safari (iOS 14+ and macOS Big Sur+), Mozilla Firefox, Microsoft Edge, and Opera.',
+      },
+      {
+        question: 'Can I adjust WebP quality?',
+        answer: 'Yes. You can configure the quality slider from 0.1 to 1.0 to achieve your target file size reduction.',
+      },
+      {
+        question: 'Can I convert logos and graphic illustrations?',
+        answer: 'Yes. WebP handles illustrations and user interface assets exceptionally well with sharp text rendering and minimal compression artifacts.',
+      },
+      {
+        question: 'Is there a daily conversion limit?',
+        answer: 'No. You can convert unlimited PNG files completely free of charge.',
+      },
+      {
+        question: 'How fast is the conversion?',
+        answer: 'Conversions take less than a second on modern devices because there are no upload or download network transfer delays.',
       },
     ],
     metaTitle: 'Free PNG to WebP Converter — Reduce Size with Transparency',
@@ -551,11 +835,35 @@ export const TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'What is a HEIC file?',
-        answer: 'HEIC is the default photo format used on modern iPhones. While it saves space, many Windows apps and websites do not natively support it.',
+        answer: 'HEIC (High Efficiency Image Container) is Apple\'s default image format on iPhones and iPads. It offers high compression but cannot be opened natively on many Windows PCs and older applications.',
       },
       {
-        question: 'Are my private photos uploaded to a third party?',
-        answer: 'No! The decoder runs in your local web browser, safeguarding your personal privacy.',
+        question: 'How do I convert HEIC to JPG without software?',
+        answer: 'Upload your .heic or .heif file into the ToolBox HEIC to JPG tool. It decodes the image in client memory and exports a universally compatible JPG file immediately.',
+      },
+      {
+        question: 'Are my personal iPhone photos safe?',
+        answer: 'Yes. Most online HEIC converters upload your personal photos to cloud servers. ToolBox uses client-side JavaScript decoders, ensuring your photos never leave your device.',
+      },
+      {
+        question: 'Can I convert HEIC to PNG instead?',
+        answer: 'Yes. You can select JPG or PNG as the target export format depending on whether you need universal compatibility or lossless rendering.',
+      },
+      {
+        question: 'What causes HEIC conversion errors?',
+        answer: 'Corrupted files or live photos with proprietary video components can sometimes cause issues. The tool handles standard iOS single-frame HEIC captures cleanly.',
+      },
+      {
+        question: 'Does converting HEIC to JPG reduce photo quality?',
+        answer: 'The converter uses high-quality JPEG quantization (~92% quality), ensuring that high-resolution details from your iPhone camera are visually indistinguishable.',
+      },
+      {
+        question: 'Can I use this tool on a Windows computer?',
+        answer: 'Yes. It runs inside Google Chrome, Microsoft Edge, or Firefox on any Windows 10/11 system without installing third-party codecs.',
+      },
+      {
+        question: 'Is there any charge for converting HEIC photos?',
+        answer: 'No. The tool is 100% free with no hidden subscriptions or watermark stamps.',
       },
     ],
     metaTitle: 'Free HEIC to JPG Converter — Convert iPhone Photos Online',
@@ -588,12 +896,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Do these QR codes expire?',
-        answer: 'No. These are static QR codes that encode your data directly into the pixel pattern. They never expire.',
+        question: 'What is a QR Code Generator?',
+        answer: 'The QR Code Generator creates custom two-dimensional matrix barcodes that can be scanned by any smartphone camera to open URLs, text, Wi-Fi credentials, or contact info.',
       },
       {
-        question: 'Which error correction level should I choose?',
-        answer: 'Level M (15% recovery) or Q (25% recovery) is ideal for standard scanning. Use High (30%) if you plan to print on rough materials.',
+        question: 'Do generated QR codes ever expire?',
+        answer: 'No! QR codes generated on ToolBox are static barcodes. The data is encoded directly into the pixel pattern itself, meaning they work forever with zero scan limits.',
+      },
+      {
+        question: 'Can I customize colors and size?',
+        answer: 'Yes. You can customize the foreground color, background color, pixel resolution (from 150px to 600px), and quiet zone margin padding.',
+      },
+      {
+        question: 'What error correction levels are supported?',
+        answer: 'The tool supports L (7%), M (15%), Q (25%), and H (30%) Reed-Solomon error correction. Level H allows codes to remain readable even if up to 30% of the surface is obscured.',
+      },
+      {
+        question: 'What export formats are available?',
+        answer: 'You can download your QR code as a standard PNG image or as a vector SVG file for crisp, high-resolution physical printing on signs, flyers, and business cards.',
+      },
+      {
+        question: 'Is my destination link or text sent to a tracking database?',
+        answer: 'No. Many commercial QR sites reroute your scans through tracking redirect servers. ToolBox encodes your raw link directly into the matrix with zero tracking intermediates.',
+      },
+      {
+        question: 'Can I use the QR code for commercial products?',
+        answer: 'Yes. All QR codes you create are free for both personal and commercial use without licensing restrictions.',
+      },
+      {
+        question: 'Can I generate Wi-Fi or contact QR codes?',
+        answer: 'Yes. You can encode standard Wi-Fi network strings (WIFI:S:MySSID;T:WPA;P:MyPassword;;) or vCard information directly.',
       },
     ],
     metaTitle: 'Free QR Code Generator — Create Custom QR Codes with Colors',
@@ -624,12 +956,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'What is the best source image size for a favicon?',
-        answer: 'A square image of 512x512 pixels with a transparent background offers the best source fidelity for all downscaled sizes.',
+        question: 'What is a Favicon?',
+        answer: 'A favicon is the small branded icon displayed in browser tabs, bookmark bars, history lists, and mobile home screen shortcuts to identify your website.',
       },
       {
-        question: 'What formats are included in the bundle?',
-        answer: 'The package includes favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png (180x180), and android-chrome-192x192.png & 512x512.png.',
+        question: 'What icon sizes does the Favicon Generator create?',
+        answer: 'It creates standard 16x16 and 32x32 multi-resolution .ico files, a 180x180 Apple Touch Icon, and standard 192x192 / 512x512 PWA web manifest icons.',
+      },
+      {
+        question: 'Can I upload a rectangular image?',
+        answer: 'Yes. The generator allows you to position and crop rectangular images into perfect squares with transparent or solid background fills.',
+      },
+      {
+        question: 'Is my brand logo uploaded to an external server?',
+        answer: 'No. The canvas icon generation algorithm runs entirely in your browser sandbox, keeping your pre-launch logos and branding assets confidential.',
+      },
+      {
+        question: 'Does it generate HTML code for my website header?',
+        answer: 'Yes. The tool provides the exact HTML <link rel="icon"> tags required to paste into your website\'s <head> section for full cross-browser compatibility.',
+      },
+      {
+        question: 'What source image format works best?',
+        answer: 'A square PNG or SVG with a transparent background of at least 512x512 pixels yields the crispest favicons across all retina display resolutions.',
+      },
+      {
+        question: 'Is the downloaded favicon free for commercial websites?',
+        answer: 'Yes. You own 100% of the generated asset with zero watermarks or commercial restrictions.',
+      },
+      {
+        question: 'Does it support dark mode favicons?',
+        answer: 'You can create both light and dark variations and use CSS media queries (prefers-color-scheme) as shown in our integration snippet.',
       },
     ],
     metaTitle: 'Free Favicon Generator — Create Multi-Size Favicon Packages Online',
@@ -661,12 +1017,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'What is the WCAG AA contrast ratio requirement?',
-        answer: 'WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18pt or 14pt bold).',
+        question: 'How does the Color Picker from Image work?',
+        answer: 'You can upload any screenshot, design, or photo and click anywhere on the canvas to inspect and copy the exact pixel color value.',
       },
       {
-        question: 'Can I pick colors from anywhere on my screen?',
-        answer: 'Yes, in supported browsers (Chromium-based), click the EyeDropper icon to sample any pixel on your desktop.',
+        question: 'What color codes are provided?',
+        answer: 'The color picker outputs HEX (#ffffff), RGB (rgb(255,255,255)), HSL (hsl(0, 0%, 100%)), and HSV formats with immediate one-click copy buttons.',
+      },
+      {
+        question: 'Can I zoom into fine details?',
+        answer: 'Yes. The interactive magnifier loupe enlarges the pixels surrounding your cursor, making it easy to select fine borders, typography strokes, and gradient transitions.',
+      },
+      {
+        question: 'Are my design screenshots uploaded to a server?',
+        answer: 'No. Image rendering and pixel data extraction (Canvas getImageData) occur strictly in local client memory.',
+      },
+      {
+        question: 'Does it keep a history of recently picked colors?',
+        answer: 'Yes. The tool stores your recent palette swatches in the current browser session so you can compare accent and background colors easily.',
+      },
+      {
+        question: 'Can I test color contrast ratios?',
+        answer: 'The tool displays relative luminance and dark/light contrast recommendations to assist with WCAG accessibility guidelines.',
+      },
+      {
+        question: 'Can I pick colors on a touchscreen mobile device?',
+        answer: 'Yes. You can touch and drag across the image on your phone to position the color crosshair accurately.',
+      },
+      {
+        question: 'Is registration required?',
+        answer: 'No. The tool is free with no registration or limits.',
       },
     ],
     metaTitle: 'Free Color Picker & Converter — HEX, RGB, HSL & WCAG Contrast',
@@ -700,12 +1080,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Are my confidential PDF documents uploaded to a remote server?',
-        answer: 'No! Unlike traditional online PDF tools that upload your sensitive contracts to remote servers, ToolBox processes the PDF entirely inside your browser.',
+        question: 'How does the PDF Compressor reduce document size?',
+        answer: 'It optimizes stream objects, consolidates cross-reference tables, strips redundant font subsets, and packs internal dictionary streams using client-side pdf-lib stream processing.',
       },
       {
-        question: 'Will text in the compressed PDF remain selectable?',
-        answer: 'Yes, vector text streams and fonts remain fully intact and searchable.',
+        question: 'Are my confidential legal or medical PDFs safe?',
+        answer: 'Yes! Unlike other online PDF sites that upload your confidential documents to cloud servers, ToolBox processes the PDF entirely inside your local browser memory.',
+      },
+      {
+        question: 'Does compression degrade text or vector sharpness?',
+        answer: 'No. Vector lines, fonts, and text selections remain crisp and scalable. Only heavy embedded raster images and duplicate dictionary trees are optimized.',
+      },
+      {
+        question: 'Is there an arbitrary file size limit?',
+        answer: 'Processing is bounded only by your device\'s available RAM rather than cloud server upload caps. You can compress documents without queue delays.',
+      },
+      {
+        question: 'Can I compress password-protected PDF files?',
+        answer: 'You must remove or unlock the password before compressing, as encrypted streams cannot be safely repacked without proper authorization keys.',
+      },
+      {
+        question: 'How much size reduction should I expect?',
+        answer: 'Depending on how the PDF was originally authored (scanned raster images vs vector text), reductions range from 20% to over 60%.',
+      },
+      {
+        question: 'Can I compress PDFs on a mobile browser?',
+        answer: 'Yes. Modern mobile browsers running on iOS and Android have sufficient WebAssembly and memory power to compress standard PDF files.',
+      },
+      {
+        question: 'Is there any watermark added to the compressed PDF?',
+        answer: 'No. The output PDF remains 100% clean with zero watermarks or footer stamps.',
       },
     ],
     metaTitle: 'Free PDF Compressor — Reduce PDF File Size Online with 100% Privacy',
@@ -737,12 +1141,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Is there a limit on the number of PDFs I can combine?',
-        answer: 'There are no artificial limits. Since merging happens locally, it is bounded only by your browser memory.',
+        question: 'How does the PDF Merger combine documents?',
+        answer: 'The tool parses multiple PDF documents in client memory using pdf-lib, copies all page dictionaries in your chosen sequence, and binds them into a single consolidated PDF file.',
       },
       {
-        question: 'Are bookmarks and form fields preserved?',
-        answer: 'Standard page contents, text, and vector graphics are merged seamlessly into the new document.',
+        question: 'Can I reorder the PDF files before merging?',
+        answer: 'Yes. You can drag and drop or use arrow controls to organize the order of your documents before generating the final combined file.',
+      },
+      {
+        question: 'Are my uploaded documents stored on a server?',
+        answer: 'No. Your documents are read using the browser HTML5 File API and processed entirely in local device memory. No files are transmitted to any server.',
+      },
+      {
+        question: 'Can I merge large PDF files?',
+        answer: 'Yes. Because operations run in your device browser, merging is constrained only by your device RAM, allowing you to merge files that exceed cloud size limits.',
+      },
+      {
+        question: 'Will bookmarks',
+        answer: 'links, and forms be preserved?,Standard page content, text layers, vector diagrams, and fonts are preserved. Complex interactive form fields are flattened to maintain layout integrity.',
+      },
+      {
+        question: 'Is there a limit on how many PDFs I can combine?',
+        answer: 'No. You can add 2, 5, 10, or more PDF files into a single master document in one pass.',
+      },
+      {
+        question: 'Does it work on Mac',
+        answer: 'Windows, and Linux?,Yes. It runs inside modern web browsers (Chrome, Edge, Safari, Firefox) across any desktop or mobile operating system.',
+      },
+      {
+        question: 'Is the service free?',
+        answer: 'Yes, 100% free with no account registrations or subscription fees.',
       },
     ],
     metaTitle: 'Free PDF Merger — Combine Multiple PDF Files Online Privately',
@@ -773,12 +1201,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'How do I specify multiple separate page ranges?',
-        answer: 'Separate individual pages and ranges with commas, for example: 1-3, 5, 7-10.',
+        question: 'How does the PDF Splitter work?',
+        answer: 'The PDF Splitter reads your multi-page document and extracts designated pages or page ranges (e.g. 1-3, 5, 8-10) into a new, standalone PDF file.',
       },
       {
-        question: 'Can I split password-protected PDFs?',
-        answer: 'You must provide an unlocked PDF or enter the password before client-side extraction.',
+        question: 'Can I split every page into separate individual PDFs?',
+        answer: 'Yes. You can extract specific ranges or split all pages into individual single-page documents with automatic sequential naming.',
+      },
+      {
+        question: 'Are my confidential documents private?',
+        answer: 'Yes. The extraction algorithm operates entirely in client memory. No PDF pages are sent over the network.',
+      },
+      {
+        question: 'Does splitting damage text quality or formatting?',
+        answer: 'No. Pages are extracted as complete binary object trees, ensuring fonts, vector paths, and formatting remain identical to the original.',
+      },
+      {
+        question: 'What syntax should I use for custom page ranges?',
+        answer: 'You can use commas and hyphens (e.g., 1-4, 7, 9-12). The tool validates page boundaries to prevent out-of-range errors.',
+      },
+      {
+        question: 'Can I split large book-length PDFs?',
+        answer: 'Yes. As long as your browser has sufficient memory to hold the document, you can extract pages from manuals and reports consisting of hundreds of pages.',
+      },
+      {
+        question: 'Can I use this tool on my smartphone?',
+        answer: 'Yes. You can select PDF files from your device storage or cloud drive and extract pages on iOS and Android.',
+      },
+      {
+        question: 'Is there any software installation required?',
+        answer: 'No. It runs immediately in your browser without Adobe Acrobat or browser extension plugins.',
       },
     ],
     metaTitle: 'Free PDF Splitter — Extract Pages & Split PDF Files Online',
@@ -809,12 +1261,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'What DPI should I use for converting PDF to JPG?',
-        answer: 'For screen viewing and social media, 150 DPI is crisp and fast. For printing or high-zoom needs, choose 300 DPI.',
+        question: 'How does the PDF to JPG Converter work?',
+        answer: 'It renders each page of your PDF into an HTML5 Canvas using PDF.js and exports the rendered raster image as high-resolution JPG files.',
       },
       {
-        question: 'Does this tool preserve vector clarity?',
-        answer: 'Yes, PDF.js renders fonts and vector shapes directly at the target pixel density for maximum clarity.',
+        question: 'What resolution / DPI are the converted JPGs?',
+        answer: 'Pages are rendered at high-resolution display densities (150 to 300 DPI equivalent), ensuring that small text, diagrams, and signatures remain crisp and readable.',
+      },
+      {
+        question: 'Are my PDF pages uploaded to an external server?',
+        answer: 'No. Rendering and image rasterization happen entirely inside your local browser runtime. No document data leaves your computer.',
+      },
+      {
+        question: 'Can I select which pages to convert?',
+        answer: 'Yes. You can convert all pages or choose specific individual pages to download as JPG images.',
+      },
+      {
+        question: 'How are multi-page conversions downloaded?',
+        answer: 'You can download individual JPG images one by one or save the entire collection in an organized manner.',
+      },
+      {
+        question: 'Can I convert scanned receipts and invoices?',
+        answer: 'Yes. Scanned PDF documents convert into clean JPG images suitable for expense filing, accounting portals, or image editing.',
+      },
+      {
+        question: 'Is there a page count limit?',
+        answer: 'There are no artificial limits. Processing speed depends entirely on your device hardware.',
+      },
+      {
+        question: 'Is registration or payment required?',
+        answer: 'No. The tool is completely free with unlimited conversions.',
       },
     ],
     metaTitle: 'Free PDF to JPG Converter — Convert PDF Pages to Images Online',
@@ -848,12 +1324,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'Does the calculator account for leap years?',
-        answer: 'Yes, full calendar leap years and varying month lengths (28, 29, 30, and 31 days) are accurately calculated.',
+        question: 'How does the Age Calculator calculate chronological age?',
+        answer: 'It measures the exact chronological interval between your date of birth and the target date (or current date), accounting for varying month lengths and leap years.',
       },
       {
-        question: 'Can I calculate age as of a past or future date?',
-        answer: 'Yes! You can customize the reference "Age at the Date of" field to any historical or future date.',
+        question: 'Does the calculator handle leap year birthdays (February 29)?',
+        answer: 'Yes. For individuals born on February 29th, the calculator properly tracks elapsed milestones and recognizes common non-leap anniversary dates accurately.',
+      },
+      {
+        question: 'What time units are displayed in the breakdown?',
+        answer: 'The tool displays your age in years, months, and days, alongside equivalent total breakdowns in total months, total weeks, total days, total hours, and total minutes lived.',
+      },
+      {
+        question: 'Can I calculate age at a future or past date?',
+        answer: 'Yes. You can customize the \'Age at the Date of\' field to calculate how old someone was on a historic event or how old they will be at retirement.',
+      },
+      {
+        question: 'Can it calculate the countdown to the next birthday?',
+        answer: 'Yes. A dedicated widget calculates the exact number of days, hours, and minutes remaining until your upcoming birthday.',
+      },
+      {
+        question: 'Is my birthdate saved or tracked?',
+        answer: 'No. Calculations run in client JavaScript and are never stored or sent to any analytics database.',
+      },
+      {
+        question: 'Can I use it on mobile?',
+        answer: 'Yes. It works with native HTML5 mobile date pickers on iOS and Android devices.',
+      },
+      {
+        question: 'Is it free to use?',
+        answer: 'Yes, 100% free with unlimited calculations.',
       },
     ],
     metaTitle: 'Free Age Calculator — Exact Age in Years, Months, Days & Hours',
@@ -886,12 +1386,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'How do you calculate percentage increase?',
-        answer: 'Subtract the old value from the new value, divide the difference by the original value, and multiply by 100.',
+        question: 'What percentage scenarios does this calculator solve?',
+        answer: 'It solves four primary percentage questions: What is X% of Y, X is what percent of Y, What is the percentage increase or decrease from X to Y, and Calculate percentage change with negative values.',
       },
       {
-        question: 'How do you calculate discount price?',
-        answer: 'Multiply the original price by (1 minus the discount percentage divided by 100).',
+        question: 'How is percentage change calculated?',
+        answer: 'Percentage change uses the standard mathematical formula: ((New Value - Old Value) / |Old Value|) * 100. It shows whether the result is an increase or a decrease.',
+      },
+      {
+        question: 'Can it calculate discounts and tax?',
+        answer: 'Yes. You can find retail discounts by computing the percentage off a price, or calculate sales tax and tips easily.',
+      },
+      {
+        question: 'Does it prevent division by zero errors?',
+        answer: 'Yes. If zero is supplied as a denominator, the calculator displays a helpful validation message rather than crashing or showing NaN.',
+      },
+      {
+        question: 'Does it provide step-by-step mathematical explanations?',
+        answer: 'Yes. Each calculation card displays the explicit algebraic formula used so students and professionals can verify the math.',
+      },
+      {
+        question: 'Is registration required?',
+        answer: 'No. The calculator is completely free with immediate real-time results.',
+      },
+      {
+        question: 'Are my calculations stored?',
+        answer: 'No. Everything executes in client-side memory without tracking.',
+      },
+      {
+        question: 'Can I copy the calculated results?',
+        answer: 'Yes. One-click copy buttons let you transfer percentages and formulas directly to your spreadsheet or notes.',
       },
     ],
     metaTitle: 'Free Percentage Calculator — 4 Quick Percentage Solvers Online',
@@ -924,12 +1448,36 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       {
-        question: 'What is the standard EMI formula?',
-        answer: 'EMI = [P x R x (1+R)^N] / [(1+R)^N - 1], where P is Principal, R is monthly interest rate, and N is the number of monthly installments.',
+        question: 'What is an EMI?',
+        answer: 'An EMI (Equated Monthly Installment) is a fixed monthly payment made by a borrower to a lender on a specific date, covering both loan principal and accrued interest.',
       },
       {
-        question: 'Can I export the repayment schedule?',
-        answer: 'Yes! Click "Export CSV" to download the complete month-by-month principal and interest breakdown.',
+        question: 'What mathematical formula is used for EMI calculation?',
+        answer: 'We use the standard reducing-balance formula: EMI = [P x r x (1+r)^n] / [(1+r)^n - 1], where P is Principal, r is periodic monthly interest rate, and n is the total number of monthly installments.',
+      },
+      {
+        question: 'What loan types does this calculator support?',
+        answer: 'It supports home loans, mortgage loans, car/auto loans, personal loans, and education loans with customizable tenure in years or months.',
+      },
+      {
+        question: 'Can I view the year-by-year amortization schedule?',
+        answer: 'Yes. An interactive amortization schedule displays the breakdown of principal paid, interest paid, and remaining loan balance for every year and month of the loan.',
+      },
+      {
+        question: 'Can I download the amortization table as a CSV?',
+        answer: 'Yes. You can export the complete month-by-month repayment schedule directly as a CSV file to open in Microsoft Excel or Google Sheets.',
+      },
+      {
+        question: 'How does loan tenure impact total interest paid?',
+        answer: 'A longer loan tenure reduces your monthly EMI amount but significantly increases the cumulative total interest paid over the life of the loan.',
+      },
+      {
+        question: 'Does the calculator support 0% interest loans?',
+        answer: 'Yes. In zero-interest promotional financing scenarios, the formula seamlessly divides principal evenly across the term without division-by-zero errors.',
+      },
+      {
+        question: 'Are my financial numbers kept confidential?',
+        answer: 'Yes. No loan amounts, interest rates, or financial data are ever sent to external lenders or marketing servers.',
       },
     ],
     metaTitle: 'Free EMI Calculator — Calculate Loan EMI & Amortization Schedule',
@@ -962,11 +1510,35 @@ export const TOOLS: ToolDefinition[] = [
     faqs: [
       {
         question: 'What is compound interest?',
-        answer: 'Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods, leading to exponential growth.',
+        answer: 'Compound interest is interest calculated on the initial principal and on the accumulated interest of previous periods, allowing investments to grow exponentially over time.',
       },
       {
-        question: 'How does compounding frequency affect total returns?',
-        answer: 'More frequent compounding (e.g., daily or monthly vs annually) increases the effective annual yield and generates higher final wealth.',
+        question: 'What is the compound interest formula used?',
+        answer: 'The calculator uses A = P(1 + r/n)^(nt) alongside periodic contribution formulas, where P is principal, r is annual interest rate, n is compounding frequency, and t is time in years.',
+      },
+      {
+        question: 'What compounding frequencies are supported?',
+        answer: 'You can calculate growth compounded annually, semi-annually, quarterly, monthly, or daily.',
+      },
+      {
+        question: 'Can I include regular monthly or annual contributions?',
+        answer: 'Yes. You can specify recurring deposits made at the beginning or end of each compounding period to simulate real-world retirement savings (401k, IRA, SIP).',
+      },
+      {
+        question: 'Does the calculator provide year-by-year accumulation tables?',
+        answer: 'Yes. An interactive schedule displays starting balance, annual contributions, interest earned that year, and ending balance with downloadable CSV capability.',
+      },
+      {
+        question: 'How does compounding frequency affect total return?',
+        answer: 'More frequent compounding (e.g. monthly vs annually) generates slightly higher total returns because interest is credited and reinvested sooner.',
+      },
+      {
+        question: 'Can I adjust for inflation?',
+        answer: 'The tool displays nominal future values and provides clear metrics on total principal invested versus total compound interest generated.',
+      },
+      {
+        question: 'Is this calculator private and free?',
+        answer: 'Yes. It runs entirely in your browser with zero data logging, no sign-ups, and unlimited calculations.',
       },
     ],
     metaTitle: 'Free Compound Interest Calculator — Forecast Savings & Investments',
@@ -974,6 +1546,10 @@ export const TOOLS: ToolDefinition[] = [
       'Calculate compound interest and future investment growth with regular deposits, compounding frequency options, and year-by-year schedules.',
   },
 ];
+
+export function getToolById(id: string): ToolDefinition | undefined {
+  return TOOLS.find((tool) => tool.id === id);
+}
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {
   return TOOLS.find((tool) => tool.slug === slug);

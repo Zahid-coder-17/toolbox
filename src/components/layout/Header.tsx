@@ -29,6 +29,7 @@ export function Header() {
     { name: 'Image', href: '/category/image' },
     { name: 'PDF', href: '/category/pdf' },
     { name: 'Calculators', href: '/category/calculators' },
+    { name: 'Guides', href: '/blog' },
   ];
 
   return (

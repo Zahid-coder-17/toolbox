@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { TOOLS, CATEGORIES } from '@/config/tools';
+import { ARTICLES } from '@/config/articles';
 import { getSiteUrl } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -33,6 +34,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
+    });
+  });
+
+  // Blog Hub & Educational Articles
+  routes.push({
+    url: `${baseUrl}/blog`,
+    lastModified,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  });
+
+  ARTICLES.forEach((article) => {
+    routes.push({
+      url: `${baseUrl}/blog/${article.slug}`,
+      lastModified: new Date(article.dateModified),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     });
   });
 

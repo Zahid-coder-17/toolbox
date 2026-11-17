@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { ICON_MAP } from '@/components/ui/tool-card';
 import { AdSlot } from '@/components/ads/AdSense';
 import { ToolAnalyticsTracker, RelatedToolLink } from '@/components/analytics/ToolAnalyticsTracker';
+import { RelatedArticles } from '@/components/blog/RelatedArticles';
 import {
   generateWebApplicationSchema,
   generateHowToSchema,
@@ -219,6 +220,8 @@ export function ToolLayout({
 
           {/* Right Column: Related Tools & Trust Callout */}
           <div className="space-y-6">
+            <RelatedArticles toolId={tool.id} />
+
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
               <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 mb-4">
                 More in {category.name}

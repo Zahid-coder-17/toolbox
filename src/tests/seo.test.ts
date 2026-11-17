@@ -10,6 +10,7 @@ import {
   generateFAQSchema,
   generateBreadcrumbSchema,
   generateCollectionPageSchema,
+  generateArticleSchema,
 } from '@/lib/seo';
 import sitemap from '@/app/sitemap';
 import robots from '@/app/robots';
@@ -215,13 +216,30 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
       expect(schema.mainEntity.itemListElement.length).toBe(8);
       expect(schema.mainEntity.itemListElement[0].url).toContain('/tools/text/');
     });
+
+    it('generates valid Article JSON-LD schema for educational guides', () => {
+      const sampleArticle = {
+        title: 'How to Compress Images',
+        description: 'Complete guide to WebP compression.',
+        slug: 'how-to-compress-images',
+        datePublished: '2026-11-17T08:00:00Z',
+        dateModified: '2026-11-17T08:00:00Z',
+        author: { name: 'ToolBox Engineering', role: 'Staff Engineer' },
+      };
+      const schema = generateArticleSchema(sampleArticle);
+      expect(schema['@type']).toBe('Article');
+      expect(schema.headline).toBe('How to Compress Images');
+      expect(schema.author.name).toBe('ToolBox Engineering');
+      expect(schema.publisher.name).toBe('ToolBox');
+      expect(schema.url).toContain('/blog/how-to-compress-images');
+    });
   });
 
   describe('Sitemap & Robots.txt', () => {
-    it('generates complete XML sitemap covering all 34 production endpoints', () => {
+    it('generates complete XML sitemap covering all production endpoints', () => {
       const entries = sitemap();
-      // 1 root + 4 categories + 24 tools + 5 legal/info = 34
-      expect(entries.length).toBe(34);
+      // 1 root + 4 categories + 24 tools + 1 blog + 4 articles + 5 legal/info = 39
+      expect(entries.length).toBe(39);
 
       const urls = entries.map((e) => e.url);
       const siteUrl = getSiteUrl();
@@ -239,6 +257,13 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
         expect(urls).toContain(`${siteUrl}${tool.href}`);
       });
 
+      // Check Blog and Educational Articles
+      expect(urls).toContain(`${siteUrl}/blog`);
+      expect(urls).toContain(`${siteUrl}/blog/how-to-compress-images-without-losing-quality`);
+      expect(urls).toContain(`${siteUrl}/blog/guide-to-merging-pdfs-securely`);
+      expect(urls).toContain(`${siteUrl}/blog/understanding-loan-emi-amortization`);
+      expect(urls).toContain(`${siteUrl}/blog/calculating-reading-time-and-speaking-speed`);
+
       // Check info pages
       expect(urls).toContain(`${siteUrl}/privacy`);
       expect(urls).toContain(`${siteUrl}/terms`);
@@ -253,6 +278,7 @@ describe('PRODUCTION SEO & STRUCTURED DATA SUITE', () => {
         expect(u).not.toContain('null');
         expect(u).not.toContain('//tools');
         expect(u).not.toContain('//category');
+        expect(u).not.toContain('//blog');
       });
     });
 
